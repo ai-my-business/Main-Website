@@ -6,9 +6,9 @@ export function Navbar() {
   const location = useLocation();
   const navItems = [
     { name: 'Home', href: '#/' },
-    { name: 'Solutions', href: '#/#services' },
-    { name: 'Process', href: '#/#how-it-works' },
-    { name: 'Founder', href: '#/#ceo' },
+    { name: 'Solutions', href: '#/services' },
+    { name: 'Process', href: '#/how-it-works' },
+    { name: 'Founder', href: '#/ceo' },
   ];
 
   return (
