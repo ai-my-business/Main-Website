@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 export function Hero() {
@@ -44,12 +45,12 @@ export function Hero() {
             >
               Take Free AI Quiz
             </a>
-            <a 
-              href="/assessment"
+            <Link 
+              to="/assessment"
               className="px-8 py-5 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 font-bold text-xs tracking-widest uppercase transition-all"
             >
               Book Time Audit
-            </a>
+            </Link>
           </motion.div>
         </div>
 
