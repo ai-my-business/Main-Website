@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { GoogleGenAI } from "@google/genai";
 import { 
   ArrowRight, 
   Clock, 
@@ -60,6 +61,7 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
           <button onClick={() => handleNav('problem')} className={`hover:text-white transition-colors ${currentView === 'problem' ? 'text-white underline underline-offset-4' : ''}`}>The Problem</button>
           <button onClick={() => handleNav('solution')} className={`hover:text-white transition-colors ${currentView === 'solution' ? 'text-white underline underline-offset-4' : ''}`}>The Solution</button>
           <button onClick={() => handleNav('results')} className={`hover:text-white transition-colors ${currentView === 'results' ? 'text-white underline underline-offset-4' : ''}`}>The Results</button>
+          <button onClick={() => handleNav('quiz')} className={`hover:text-white transition-colors ${currentView === 'quiz' ? 'text-white underline underline-offset-4' : ''}`}>AI Quiz</button>
           <button onClick={() => handleNav('assessment')} className={`hover:text-white transition-colors ${currentView === 'assessment' ? 'text-white underline underline-offset-4' : ''}`}>AI Assessment</button>
           <button onClick={() => handleNav('about')} className={`hover:text-white transition-colors ${currentView === 'about' ? 'text-white underline underline-offset-4' : ''}`}>About</button>
           <button onClick={() => handleNav('contact')} className={`hover:text-white transition-colors ${currentView === 'contact' ? 'text-white underline underline-offset-4' : ''}`}>Contact</button>
@@ -90,6 +92,7 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
             <button onClick={() => handleNav('problem')} className="text-lg font-medium">The Problem</button>
             <button onClick={() => handleNav('solution')} className="text-lg font-medium">The Solution</button>
             <button onClick={() => handleNav('results')} className="text-lg font-medium">The Results</button>
+            <button onClick={() => handleNav('quiz')} className="text-lg font-medium">AI Quiz</button>
             <button onClick={() => handleNav('assessment')} className="text-lg font-medium">AI Assessment</button>
             <button onClick={() => handleNav('about')} className="text-lg font-medium">About Us</button>
             <button onClick={() => handleNav('contact')} className="text-lg font-medium">Contact</button>
@@ -191,6 +194,12 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
               >
                 <span>👉 Book Your Assessment</span>
               </button>
+              <button 
+                onClick={() => onNavigate('quiz')}
+                className="w-full sm:w-auto px-10 py-5 glass text-white font-bold rounded-full hover:bg-white/10 transition-all border border-white/10"
+              >
+                Free AI Audit Quiz
+              </button>
             </div>
           </motion.div>
         </div>
@@ -239,7 +248,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                  icon: Search, 
                  title: "Audit", 
                  text: "Start with the 2-minute AI Readiness Quiz. It quickly highlights where you’re losing time across admin, marketing, and delivery—so you can see exactly where AI can give you back hours.",
-                 action: () => onNavigate('problem')
+                 action: () => onNavigate('quiz')
                },
                { 
                  icon: BarChart3, 
@@ -322,8 +331,8 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
           <div className="relative z-10">
              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white">Stop Guessing Where to Start with AI</h2>
              <p className="text-lg text-zinc-400 mb-12">Take a quick quiz to identify what kind of opportunities are available for your business.</p>
-             <button onClick={() => onNavigate('assessment')} className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all">
-                Book Your Free Audit
+             <button onClick={() => onNavigate('quiz')} className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all">
+                Free AI Audit Quiz
              </button>
           </div>
        </div>
@@ -506,15 +515,32 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
            ))}
         </div>
 
+        <div className="mb-24 text-center">
+           <p className="text-xl text-zinc-400 mb-8 max-w-3xl mx-auto font-light leading-relaxed">
+              These services aren't just technical implementations—they are strategic moves that translate into measurable ROI and reclaimed time for your business.
+           </p>
+           <button 
+             onClick={() => onNavigate('results')} 
+             className="text-white font-bold flex items-center gap-2 mx-auto hover:text-blue-400 transition-colors group"
+           >
+              See the Results <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+           </button>
+        </div>
+
         <div className="max-w-4xl mx-auto p-12 md:p-20 glass rounded-[4rem] text-center relative border-white/10 bg-blue-500/[0.01]">
            <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Invest in Systems, Not Just Tools</h2>
               <p className="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
                  Our pricing is transparent and discussed directly with you after we understand your unique workflows. No generic packages—just tailored value.
               </p>
-              <button onClick={() => onNavigate('assessment')} className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 mx-auto">
-                 Book Your Assessment <ArrowRight className="w-5 h-5" />
-              </button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onClick={() => onNavigate('assessment')} className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-3">
+                   Book Your Assessment <ArrowRight className="w-5 h-5" />
+                </button>
+                <button onClick={() => onNavigate('quiz')} className="px-10 py-5 glass text-white font-bold rounded-full hover:bg-white/10 transition-all border border-white/10">
+                   Free AI Audit Quiz
+                </button>
+              </div>
            </div>
         </div>
       </div>
@@ -674,8 +700,8 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                <div className="pt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
                   {[
                      { label: "Hours Saved Weekly", val: "5-15h" },
-                     { label: "Average ROI", val: "10x+" },
-                     { label: "Systems Built", val: "50+" }
+                     { label: "total first year engineering hours saved", val: "$200k" },
+                     { label: "employee adoption", val: "10+" }
                   ].map((stat, i) => (
                      <div key={i} className="text-center">
                         <p className="text-3xl font-bold text-white mb-1">{stat.val}</p>
@@ -758,6 +784,252 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
               Book Your Free 15-Min Chat
            </button>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [contactInfo, setContactInfo] = useState({ name: '', email: '' });
+  const [actionPlan, setActionPlan] = useState('');
+
+  useEffect(() => { window.scrollTo(0, 0); }, [step, showResults]);
+
+  const questions = [
+    {
+      id: 1,
+      question: "How much time does your team spend each week on repetitive administrative tasks?",
+      options: ["0–2 hours", "3–5 hours", "6–10 hours", "10+ hours"]
+    },
+    {
+      id: 2,
+      question: "How often do you or your team manually respond to similar customer or client questions?",
+      options: ["Rarely", "Occasionally", "Frequently", "Daily / Constantly"]
+    },
+    {
+      id: 3,
+      question: "How are most of your internal processes currently handled?",
+      options: ["Fully manual (no automation)", "A mix of manual + basic tools", "Some automation tools in place", "Mostly automated already"]
+    },
+    {
+      id: 4,
+      question: "How much time is spent each week on data entry, updating systems, or transferring information between tools?",
+      options: ["Very little", "A few hours", "Several hours", "A significant portion of the week"]
+    },
+    {
+      id: 5,
+      question: "How often do delays or bottlenecks occur due to manual work or human dependency?",
+      options: ["Rarely", "Sometimes", "Often", "Very frequently"]
+    },
+    {
+      id: 6,
+      question: "What's the number 1 problem/challenge facing you right now?",
+      options: ["money", "time", "quality"]
+    },
+    {
+      id: 7,
+      question: "If you could remove 20–40% of manual workload in your business, what would that mean for you?",
+      options: ["Minimal impact", "Helpful but not critical", "Significant time and cost savings", "Game-changing growth opportunity"]
+    }
+  ];
+
+  const handleAnswer = (option: string) => {
+    const newAnswers = [...answers, option];
+    setAnswers(newAnswers);
+    if (step < questions.length - 1) {
+      setStep(step + 1);
+    } else {
+      setStep(questions.length); // Final step for contact info
+    }
+  };
+
+  const generateActionPlan = async () => {
+    setIsSubmitting(true);
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      
+      const prompt = `
+        You are an AI Systems Architect. A business owner just took an AI Audit Quiz. 
+        Here are their answers:
+        ${questions.map((q, i) => `${q.question}: ${answers[i]}`).join('\n')}
+        
+        Based on these answers, generate a "Quick Action Plan" for their business.
+        Format it in clear, punchy bullet points. 
+        Focus on identifying "Low Hanging Fruit" (immediate wins) and "Long Term System Gains" (scalable infrastructure).
+        Keep it under 250 words and extremely practical.
+        Address them as a professional AI systems architect.
+      `;
+
+      const response = await ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        contents: prompt
+      });
+      
+      setActionPlan(response.text || "Focus on automating your repetitive admin tasks first. Start by documenting your most common manual workflows and identify where lead follow-ups can be streamlined using tools like ChatGPT and Zapier.");
+      setShowResults(true);
+    } catch (error) {
+      console.error("Error generating action plan:", error);
+      // Fallback action plan if API fails
+      setActionPlan("Focus on automating your repetitive admin tasks first. Start by documenting your most common manual workflows and identify where lead follow-ups can be streamlined using tools like ChatGPT and Zapier.");
+      setShowResults(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    generateActionPlan();
+  };
+
+  if (showResults) {
+    return (
+      <div className="pt-40 pb-32 px-6">
+        <div className="max-w-4xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="glass rounded-[3.5rem] p-10 md:p-20 border-white/10"
+          >
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center border border-green-500/20">
+                <CheckCircle2 className="w-6 h-6 text-green-400" />
+              </div>
+              <h2 className="text-3xl font-bold text-white">Your AI Readiness Report</h2>
+            </div>
+
+            <div className="space-y-12">
+              <div className="p-8 rounded-3xl bg-blue-500/5 border border-blue-500/10">
+                <h3 className="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
+                  <Lightbulb className="w-5 h-5" /> Quick Action Plan
+                </h3>
+                <div className="text-zinc-300 leading-relaxed space-y-4 prose prose-invert max-w-none">
+                   {actionPlan.split('\n').map((line, i) => (
+                     <p key={i}>{line}</p>
+                   ))}
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-white">Next Steps</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 glass rounded-2xl border-white/5">
+                    <p className="font-bold text-white mb-2">Check Your Email</p>
+                    <p className="text-sm text-zinc-500">We've sent a detailed copy of this plan to {contactInfo.email}.</p>
+                  </div>
+                  <div className="p-6 glass rounded-2xl border-blue-500/20 bg-blue-500/5">
+                    <p className="font-bold text-white mb-2">Want a Deep Dive?</p>
+                    <p className="text-sm text-zinc-500 mb-4">Book a 45-min assessment to build a full custom roadmap.</p>
+                    <button 
+                      onClick={() => onNavigate('assessment')}
+                      className="text-sm font-bold text-blue-400 flex items-center gap-2"
+                    >
+                      Book Now <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="pt-40 pb-32 px-6">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-12">
+          <div className="flex justify-between items-end mb-4">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400">AI Readiness Quiz</span>
+            <span className="text-zinc-500 text-xs font-mono">{Math.min(step + 1, questions.length)} / {questions.length}</span>
+          </div>
+          <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+            <motion.div 
+              className="h-full bg-blue-500"
+              initial={{ width: 0 }}
+              animate={{ width: `${(step / questions.length) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        <AnimatePresence mode="wait">
+          {step < questions.length ? (
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="space-y-10"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                {questions[step].question}
+              </h2>
+              <div className="grid grid-cols-1 gap-4">
+                {questions[step].options.map((option, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleAnswer(option)}
+                    className="w-full p-6 text-left glass rounded-2xl border-white/5 hover:border-blue-500/50 hover:bg-white/[0.03] transition-all group flex items-center justify-between"
+                  >
+                    <span className="text-lg text-zinc-300 group-hover:text-white transition-colors">{option}</span>
+                    <ArrowRight className="w-5 h-5 text-zinc-600 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="contact"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="glass p-10 md:p-16 rounded-[3rem] border-white/10"
+            >
+              <div className="text-center mb-10">
+                <h2 className="text-3xl font-bold text-white mb-4">Almost Done!</h2>
+                <p className="text-zinc-400">Where should we send your quick action plan?</p>
+              </div>
+              <form onSubmit={handleContactSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-2">First Name</label>
+                  <input 
+                    required
+                    type="text"
+                    value={contactInfo.name}
+                    onChange={(e) => setContactInfo({ ...contactInfo, name: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-2">Email Address</label>
+                  <input 
+                    required
+                    type="email"
+                    value={contactInfo.email}
+                    onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <button 
+                  disabled={isSubmitting}
+                  type="submit"
+                  className="w-full py-5 bg-white text-black font-bold rounded-2xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                >
+                  {isSubmitting ? 'Generating Your Plan...' : 'Get My Action Plan'} <ArrowRight className="w-5 h-5" />
+                </button>
+                <p className="text-center text-[10px] text-zinc-600">
+                  By clicking, you agree to receive a one-time AI action plan and occasional system updates.
+                </p>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -901,7 +1173,7 @@ const BookPage = () => {
   );
 };
 
-const AssessmentPage = () => {
+const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
   useEffect(() => { 
     window.scrollTo(0, 0); 
     
@@ -1000,7 +1272,7 @@ const AssessmentPage = () => {
               {[ 
                 { icon: Search, title: "1. Pre-Call Questionnaire", desc: "Short assessment about current tools and time drains to ensure every minute counts." },
                 { icon: Video, title: "2. 45-Min Zoom Session", desc: "A live deep dive into your real workflows to uncover inefficiencies you haven't considered yet." },
-                { icon: FileText, title: "3. Custom Report", desc: "Delivered within 48 hours, featuring identified pain points, ROI summary, and a 7-day implementation plan." }
+                { icon: FileText, title: "3. Custom Report", desc: "Delivered within 48 hours, featuring identified pain points, ROI summary, and a 7-day step by step implementation plan." }
               ].map((item, i) => (
                 <div key={i} className="space-y-4">
                   <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
@@ -1010,6 +1282,16 @@ const AssessmentPage = () => {
                   <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-16 pt-12 border-t border-white/5">
+              <div className="max-w-3xl mx-auto text-center">
+                 <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-500/50 mb-3 block">Need Further Help?</span>
+                 <h3 className="text-2xl font-bold text-white mb-3">4. Implementation</h3>
+                 <p className="text-zinc-400 text-sm leading-relaxed mx-auto max-w-xl">
+                    If you’d like help implementing the more advanced or complex automations, we can discuss assisting as an additional service.
+                 </p>
+              </div>
             </div>
           </div>
 
@@ -1115,10 +1397,11 @@ export default function App() {
            transition={{ duration: 0.2 }}
         >
           {view === 'home' && <Home onNavigate={handleNavigate} />}
-          {view === 'assessment' && <AssessmentPage />}
+          {view === 'assessment' && <AssessmentPage onNavigate={handleNavigate} />}
           {view === 'problem' && <ProblemPage onNavigate={handleNavigate} />}
           {view === 'solution' && <SolutionPage onNavigate={handleNavigate} />}
           {view === 'results' && <ResultsPage onNavigate={handleNavigate} />}
+          {view === 'quiz' && <QuizPage onNavigate={handleNavigate} />}
           {view === 'about' && <AboutPage />}
           {view === 'contact' && <ContactPage />}
           {view === 'book' && <BookPage />}
