@@ -11,6 +11,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-white selection:text-black;
   }
