@@ -11,6 +11,8 @@ import {
   Clock, 
   CheckCircle2, 
   Brain, 
+  Database,
+  Mail,
   AlertCircle, 
   ChevronDown, 
   Search, 
@@ -205,32 +207,80 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
         </div>
         
         {/* Visual representation */}
-        <motion.div className="hidden lg:block flex-1 max-w-xl">
-           <div className="p-8 glass rounded-[3rem] border-white/10">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-white/5">
-                   <span className="text-sm font-bold text-zinc-500 uppercase tracking-widest">Manual Work Drain</span>
-                   <span className="text-red-400 font-mono">-12h/wk</span>
-                </div>
-                <div className="space-y-3">
-                   {[
-                     { label: 'Email Follow-ups', val: '80%' },
-                     { label: 'Data Entry', val: '95%' },
-                     { label: 'Report Generation', val: '70%' }
-                   ].map((item, i) => (
-                     <div key={i} className="space-y-1">
-                        <div className="flex justify-between text-[10px] text-zinc-600">
-                           <span>{item.label}</span>
-                           <span>{item.val} Automatable</span>
+        <motion.div className="hidden lg:block flex-1 max-w-2xl">
+           <div className="p-10 glass rounded-[3rem] border-white/10 bg-white/[0.02]">
+              <div className="flex items-center gap-10">
+                {/* Left side text */}
+                <div className="flex-1 space-y-8">
+                  <div className="space-y-2">
+                    <span className="text-sm font-bold text-zinc-500 uppercase tracking-[0.3em]">Manual Work Drain</span>
+                    <div className="text-4xl font-bold text-red-500">-$10,000+ <span className="text-lg text-red-500/50">/ week</span></div>
+                  </div>
+
+                  <div className="space-y-5">
+                    {[
+                      { label: 'Email Follow-ups', val: '-4h/wk', progress: 40, icon: Mail },
+                      { label: 'Data Entry', val: '-5h/wk', progress: 50, icon: Database },
+                      { label: 'Report Generation', val: '-3h/wk', progress: 30, icon: FileText },
+                      { label: 'Productivity Lost', val: '-12h/wk', progress: 100, icon: Clock, highlight: true }
+                    ].map((item, i) => (
+                      <div key={i} className="space-y-2">
+                        <div className="flex justify-between items-center text-xs">
+                          <div className="flex items-center gap-2 text-zinc-400">
+                            <item.icon className="w-3 h-3" />
+                            <span className={item.highlight ? "text-zinc-200 font-bold" : ""}>{item.label}</span>
+                          </div>
+                          <span className={item.highlight ? "text-red-400 font-bold" : "text-zinc-500"}>{item.val}</span>
                         </div>
-                        <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                           <div className="h-full bg-blue-500/40" style={{ width: item.val }} />
+                        <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${item.progress}%` }}
+                            transition={{ duration: 1, delay: i * 0.1 }}
+                            className={`h-full ${item.highlight ? 'bg-red-500/60' : 'bg-zinc-700'}`} 
+                          />
                         </div>
-                     </div>
-                   ))}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="pt-4 border-t border-white/5">
-                   <p className="text-xs text-zinc-400 italic">"Most business owners are paying a 'Manual Tax' they don't even realize exists."</p>
+
+                {/* Right side SVG */}
+                <div className="relative shrink-0 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-red-500/5 blur-3xl rounded-full" />
+                  <svg viewBox="0 0 100 100" className="w-48 h-48 text-zinc-700 relative z-10" fill="none" stroke="currentColor">
+                    {/* Bucket main body */}
+                    <path d="M30 35 L70 35 L62 85 L38 85 Z" strokeWidth="1.5" strokeLinejoin="round" />
+                    {/* Bucket Handle */}
+                    <path d="M30 35 Q50 10 70 35" strokeWidth="1.5" opacity="0.4" />
+                    {/* Water/Money Fill level */}
+                    <path d="M32 45 L68 45 L64 70 L35 70 Z" fill="currentColor" opacity="0.05" stroke="none" />
+                    
+                    {/* Leak Holes and drips */}
+                    <circle cx="42" cy="65" r="1" fill="currentColor" />
+                    <path d="M42 65 Q35 75 38 90" strokeWidth="1" strokeDasharray="2 3" opacity="0.6" />
+                    
+                    <circle cx="58" cy="78" r="1" fill="currentColor" />
+                    <path d="M58 78 Q65 88 62 95" strokeWidth="1" strokeDasharray="2 3" opacity="0.6" />
+                    
+                    {/* Dollar Bill floating around leaks */}
+                    <g transform="translate(25, 75) rotate(-20)" opacity="0.8">
+                      <rect width="8" height="4" rx="0.5" strokeWidth="0.8" />
+                      <circle cx="4" cy="2" r="0.5" fill="currentColor" />
+                    </g>
+                    <g transform="translate(68, 85) rotate(15)" opacity="0.8">
+                      <rect width="8" height="4" rx="0.5" strokeWidth="0.8" />
+                      <circle cx="4" cy="2" r="0.5" fill="currentColor" />
+                    </g>
+                    <g transform="translate(48, 92) rotate(5)" opacity="0.8">
+                      <rect width="8" height="4" rx="0.5" strokeWidth="0.8" />
+                      <circle cx="4" cy="2" r="0.5" fill="currentColor" />
+                    </g>
+                    
+                    {/* Dollar Symbols */}
+                    <text x="35" y="55" fontSize="6" fill="currentColor" opacity="0.3" fontFamily="sans-serif">$</text>
+                    <text x="55" y="52" fontSize="6" fill="currentColor" opacity="0.3" fontFamily="sans-serif">$</text>
+                  </svg>
                 </div>
               </div>
            </div>
@@ -247,7 +297,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                { 
                  icon: Search, 
                  title: "Audit", 
-                 text: "Start with the 2-minute AI Readiness Quiz. It quickly highlights where you’re losing time across admin, marketing, and delivery—so you can see exactly where AI can give you back hours.",
+                 text: "Start with the 2-minute AI Readiness Quiz. It quickly exposes where your business is losing time—so you can pinpoint exactly where AI can win back hours.",
                  action: () => onNavigate('quiz')
                },
                { 
@@ -259,7 +309,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                { 
                  icon: Rocket, 
                  title: "Implementation", 
-                 text: "We take your roadmap and implement AI into your business for you. We streamline workflows, integrate the right tools, and remove bottlenecks so you can reclaim hours each week without the guesswork or overwhelm.",
+                 text: "We take your roadmap and implement AI into your business for you. We streamline workflows, integrate the right tools, and remove bottlenecks—so you don’t have to think about it while the gains stack up in the background.",
                  action: () => onNavigate('assessment')
                }
              ].map((item, i) => (
@@ -287,10 +337,10 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                 <h3 className="text-2xl font-bold mb-8 text-green-400">You’ll feel right at home if…</h3>
                 <ul className="space-y-6">
                    {[
-                     "You’re running a solo or small service-based business and juggling everything yourself.",
+                     "You’re juggling a solo or small business and don’t know what to start with AI.",
                      "You’ve experimented with tools like ChatGPT but don’t have a clear system in place.",
                      "You’re frustrated with tutorials that assume you already know a dozen other tools.",
-                     "You’re after quick, practical wins this week—not another 10-hour course."
+                     "You’re after quick, practical wins this week—not another 10-hour course. You want value not content."
                    ].map((item, i) => (
                       <li key={i} className="flex items-start gap-4">
                          <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 mt-1">
@@ -345,16 +395,15 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
   return (
     <div className="pt-40 pb-32 px-6">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading badge="The Reality" align="left">The Growth Gap</SectionHeading>
+        <SectionHeading badge="The Reality" align="left">Stuck in AI Limbo</SectionHeading>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
            <div className="lg:col-span-8 space-y-12">
               <div className="space-y-6">
-                 <h3 className="text-3xl font-bold text-white leading-tight">You already know AI can transform your business.</h3>
+                 <h3 className="text-3xl font-bold text-white leading-tight">You can see how powerful AI is—but you haven’t put it to work in your business yet.</h3>
                  <p className="text-xl text-zinc-400 leading-relaxed font-light">
-                    You’ve saved the tools. Watched the tutorials. Read the threads.
+                    lets help you see the power.
                  </p>
-                 <p className="text-2xl font-bold text-white">But nothing’s changed.</p>
               </div>
 
               <div className="p-10 glass rounded-[2.5rem] border-blue-500/10 bg-blue-500/[0.02] relative overflow-hidden">
@@ -461,7 +510,7 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
   return (
     <div className="pt-40 pb-32 px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading badge="The Solution" align="center">How We Help You Win Back Your Time</SectionHeading>
+        <SectionHeading badge="The Solution" align="center">How We Help You</SectionHeading>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
            {[
@@ -483,7 +532,7 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
              {
                icon: Brain,
                title: "Knowledge Systems / Custom GPTs",
-               desc: "Upload your business brain into a system. We build custom AI assistants trained specifically on your brand voice, policies, and internal documentation."
+               desc: "Centralise your business knowledge into one intelligent system, that you can access. Consolidating and Creating a single source of truth that compounds over time."
              },
              {
                icon: MousePointer2,
@@ -542,6 +591,58 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
                 </button>
               </div>
            </div>
+        </div>
+
+        {/* Is This Right for You? */}
+        <div className="mt-32 space-y-8">
+          <SectionHeading badge="Compatibility">Is This Right for You?</SectionHeading>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Negative Fit */}
+            <div className="p-10 glass border-red-500/10 rounded-[2.5rem] bg-red-500/[0.01]">
+              <h3 className="text-xl font-bold mb-8 text-red-400 uppercase tracking-widest flex items-center gap-2">
+                <XCircle className="w-5 h-5" />
+                This is NOT for you if…
+              </h3>
+              <ul className="space-y-4 text-zinc-500">
+                {[
+                  "You’re hoping for instant results or “push-button” success",
+                  "You’re unwilling to invest 30–60 minutes learning a tool to reclaim 5–10 hours weekly",
+                  "You haven’t started generating revenue or built processes worth optimizing"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <X className="w-5 h-5 shrink-0 mt-1 text-red-500/50" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Positive Fit */}
+            <div className="p-10 glass border-green-500/10 rounded-[2.5rem] bg-green-500/[0.01]">
+              <h3 className="text-xl font-bold mb-8 text-green-400 uppercase tracking-widest flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" />
+                This IS for you if…
+              </h3>
+              <ul className="space-y-4 text-zinc-200">
+                {[
+                  "You’re earning $150K–$500K/year and overwhelmed with admin tasks and low value work",
+                  "You’ve used ChatGPT but aren’t sure how to weave AI into your daily workflows. Things still feel manual.",
+                  "You keep saving tools but never actually implement them",
+                  "You want a clear starting point—not another course that overloads you",
+                  "You’re ready to put in a few hours THIS WEEK to save countless hours later",
+                  "You care about actual results instead of tech",
+                  "Information is scattered across many places and spending lots of time on repetitive /low value tasks"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <div className="w-5 h-5 shrink-0 mt-1 rounded-full bg-green-400/10 flex items-center justify-center">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
+                    </div>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -733,7 +834,7 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                   role: "E-commerce Founder"
                 },
                 {
-                  quote: "This isn't about 'ChatGPT tips.' It's about building a real system that talks to your tools. Game changer for my workflow.",
+                  quote: "I was expecting 'ChatGPT tips.' But instead I got systems that are practical. I didn’t realise how much I didn’t know.",
                   author: "David L.",
                   role: "Real Estate Professional"
                 },
@@ -1208,70 +1309,21 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
 
         {/* Content Tabs/Grid */}
         <div className="grid grid-cols-1 gap-12 mb-24">
-          {/* Is This Right for You? */}
-          <div className="space-y-8">
-            <SectionHeading badge="Compatibility">Is This Right for You?</SectionHeading>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Negative Fit */}
-              <div className="p-10 glass border-red-500/10 rounded-[2.5rem] bg-red-500/[0.01]">
-                <h3 className="text-xl font-bold mb-8 text-red-400 uppercase tracking-widest flex items-center gap-2">
-                  <XCircle className="w-5 h-5" />
-                  This is NOT for you if…
-                </h3>
-                <ul className="space-y-4 text-zinc-500">
-                  {[
-                    "You want someone to handle everything for you (this is a system you’ll apply yourself)",
-                    "You’re hoping for instant results or “push-button” success",
-                    "You’re unwilling to invest 30–60 minutes learning a tool to reclaim 5–10 hours weekly",
-                    "You’ve never used ChatGPT or any AI tools before",
-                    "You haven’t started generating revenue or built processes worth optimizing"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <X className="w-5 h-5 shrink-0 mt-1 text-red-500/50" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Positive Fit */}
-              <div className="p-10 glass border-green-500/10 rounded-[2.5rem] bg-green-500/[0.01]">
-                <h3 className="text-xl font-bold mb-8 text-green-400 uppercase tracking-widest flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5" />
-                  This IS for you if…
-                </h3>
-                <ul className="space-y-4 text-zinc-200">
-                  {[
-                    "You’re earning $150K–$500K/year and overwhelmed with admin tasks",
-                    "You’ve used ChatGPT but aren’t sure how to weave AI into your daily workflows",
-                    "You keep saving tools but never actually implement them",
-                    "You want a clear starting point—not another course that overloads you",
-                    "You’re ready to put in a few hours THIS WEEK to save countless hours later",
-                    "You care more about execution than theory"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <div className="w-5 h-5 shrink-0 mt-1 rounded-full bg-green-400/10 flex items-center justify-center">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
-                      </div>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
 
           {/* What You Get */}
           <div className="p-10 glass rounded-[2.5rem] bg-white/[0.02] border-white/10">
-            <div className="flex items-center gap-4 mb-10 text-white">
-              <Sparkles className="w-6 h-6" />
-              <h2 className="text-2xl font-bold uppercase tracking-widest text-center md:text-left">Here's What You Get</h2>
+            <div className="text-center mb-10">
+              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-500/50 mb-3 block">AI Assessment</span>
+              <div className="flex items-center justify-center gap-4 text-white">
+                <Sparkles className="w-6 h-6 text-blue-400" />
+                <h2 className="text-2xl font-bold uppercase tracking-widest">Here's What You Get</h2>
+              </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[ 
-                { icon: Search, title: "1. Pre-Call Questionnaire", desc: "Short assessment about current tools and time drains to ensure every minute counts." },
-                { icon: Video, title: "2. 45-Min Zoom Session", desc: "A live deep dive into your real workflows to uncover inefficiencies you haven't considered yet." },
+                { icon: Search, title: "1. Pre-Call Questionnaire", desc: "Short call about current tools and time drains, gain understanding of business and prepare for meeting." },
+                { icon: Video, title: "2. 45-Min Zoom Session", desc: "A live deep dive into your real workflows, comprehensive review of how your business operates to identify practical opportunities and biggest wins" },
                 { icon: FileText, title: "3. Custom Report", desc: "Delivered within 48 hours, featuring identified pain points, ROI summary, and a 7-day step by step implementation plan." }
               ].map((item, i) => (
                 <div key={i} className="space-y-4">
@@ -1289,7 +1341,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
                  <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-500/50 mb-3 block">Need Further Help?</span>
                  <h3 className="text-2xl font-bold text-white mb-3">4. Implementation</h3>
                  <p className="text-zinc-400 text-sm leading-relaxed mx-auto max-w-xl">
-                    If you’d like help implementing the more advanced or complex automations, we can discuss assisting as an additional service.
+                    If you’d like help implementing the more advanced or complex automations, we can discuss assisting as an additional service. See the solution page for additional support we provide.
                  </p>
               </div>
             </div>
@@ -1321,7 +1373,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
                 </div>
 
                 <p className="text-lg text-zinc-400 pt-4">
-                  The assessment is <span className="text-white font-bold">$999</span>. The real cost of doing nothing is the hours you lose every single week.
+                  The assessment is <span className="text-white font-bold">$500</span>. If this assessment helps you save just a couple hours per week, it pays for itself in time within the first week. Most clients uncover <span className="text-white font-bold">at least 5–10 hours</span> of weekly time savings.
                 </p>
               </div>
               
