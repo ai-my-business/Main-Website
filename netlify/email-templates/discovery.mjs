@@ -6,13 +6,13 @@
 // Variables available in the `booking` object:
 //   booking.name          — invitee's full name
 //   booking.email         — invitee's email
-//   booking.eventName     — Calendly event type name
+//   booking.eventName     — cal.com event type slug
 //   booking.startTime     — ISO start time (UTC)
 //   booking.endTime       — ISO end time (UTC)
 //   booking.timezone      — invitee's timezone
-//   booking.location      — meeting location object (Zoom/Meet/phone/custom)
-//   booking.cancelUrl     — Calendly cancel link
-//   booking.rescheduleUrl — Calendly reschedule link
+//   booking.location      — meeting link (Zoom URL, Google Meet, etc.)
+//   booking.cancelUrl     — cal.com cancel link
+//   booking.rescheduleUrl — cal.com reschedule link
 // ─────────────────────────────────────────────────────────────────────────────
 
 import {

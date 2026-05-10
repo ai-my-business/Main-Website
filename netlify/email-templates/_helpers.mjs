@@ -58,8 +58,18 @@ export function formatTime(isoString, timezone = 'Australia/Sydney') {
 
 export function formatLocation(location) {
   if (!location) return 'Details will be sent separately';
-  if (typeof location === 'string') return location;
 
+  if (typeof location === 'string') {
+    if (location.startsWith('http')) {
+      return `<a href="${location}" style="color:${BRAND.accentColor};word-break:break-all;">${location}</a>`;
+    }
+    if (location.includes('zoom'))                              return 'Zoom — join link will be in your calendar invite';
+    if (location.includes('google'))                           return 'Google Meet — join link will be in your calendar invite';
+    if (location.includes('teams') || location.includes('office365')) return 'Microsoft Teams — link will be provided';
+    return location;
+  }
+
+  // Object form (kept for backwards compatibility)
   switch (location.type) {
     case 'zoom':
     case 'google_conference':

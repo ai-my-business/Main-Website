@@ -1213,13 +1213,22 @@ const ContactPage = () => {
 };
 
 const BookPage = () => {
-  useEffect(() => { 
-    window.scrollTo(0, 0); 
-    const script = document.createElement('script');
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    (function (C: any, A: string, L: string) {
+      const p = (a: any, ar: any) => { a.q.push(ar); };
+      const d = C.document;
+      C.Cal = C.Cal || function (...args: any[]) {
+        const cal = C.Cal;
+        if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; const s: HTMLScriptElement = d.createElement('script'); s.src = A; d.head.appendChild(s); cal.loaded = true; }
+        if (args[0] === L) { const api: any = (...a: any[]) => p(api, a); const ns = args[1]; api.q = []; if (typeof ns === 'string') { cal.ns[ns] = cal.ns[ns] || api; p(cal.ns[ns], args); p(cal, ['-', ns, api]); } else { p(cal, args); } return; }
+        p(cal, args);
+      };
+    })(window as any, 'https://app.cal.com/embed/embed.js', 'init');
+    const Cal = (window as any).Cal;
+    Cal('init', { origin: 'https://cal.com' });
+    Cal('inline', { elementOrSelector: '#cal-inline-book', calLink: 'ai-my-business/15min', layout: 'month_view' });
+    Cal('ui', { theme: 'dark', styles: { branding: { brandColor: '#0058da' } }, hideEventTypeDetails: false, layout: 'month_view' });
   }, []);
 
   return (
@@ -1275,11 +1284,7 @@ const BookPage = () => {
                   <div className="w-12 h-1 bg-white/5 rounded-full" />
                 </div>
                 <div className="w-full min-h-[700px] relative bg-zinc-950">
-                  <div 
-                    className="calendly-inline-widget" 
-                    data-url="https://calendly.com/hello-ai-my-business?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=363636&text_color=ffffff&primary_color=0058da" 
-                    style={{ minWidth: '320px', height: '900px' }}
-                  ></div>
+                  <div id="cal-inline-book" style={{ width: '100%', height: '900px', overflow: 'scroll' }} />
                 </div>
               </div>
            </div>
@@ -1290,18 +1295,22 @@ const BookPage = () => {
 };
 
 const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
-  useEffect(() => { 
-    window.scrollTo(0, 0); 
-    
-    // Standard way to load Calendly in React/SPAs to ensure it initializes when the div is ready
-    const script = document.createElement('script');
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    (function (C: any, A: string, L: string) {
+      const p = (a: any, ar: any) => { a.q.push(ar); };
+      const d = C.document;
+      C.Cal = C.Cal || function (...args: any[]) {
+        const cal = C.Cal;
+        if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; const s: HTMLScriptElement = d.createElement('script'); s.src = A; d.head.appendChild(s); cal.loaded = true; }
+        if (args[0] === L) { const api: any = (...a: any[]) => p(api, a); const ns = args[1]; api.q = []; if (typeof ns === 'string') { cal.ns[ns] = cal.ns[ns] || api; p(cal.ns[ns], args); p(cal, ['-', ns, api]); } else { p(cal, args); } return; }
+        p(cal, args);
+      };
+    })(window as any, 'https://app.cal.com/embed/embed.js', 'init');
+    const Cal = (window as any).Cal;
+    Cal('init', { origin: 'https://cal.com' });
+    Cal('inline', { elementOrSelector: '#cal-inline-assessment', calLink: 'ai-my-business/45min', layout: 'month_view' });
+    Cal('ui', { theme: 'dark', styles: { branding: { brandColor: '#0058da' } }, hideEventTypeDetails: false, layout: 'month_view' });
   }, []);
 
   return (
@@ -1421,11 +1430,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
                 <div className="w-12 h-1 bg-white/5 rounded-full" />
               </div>
               <div className="w-full min-h-[700px] relative bg-zinc-950">
-                <div 
-                  className="calendly-inline-widget" 
-                  data-url="https://calendly.com/hello-ai-my-business?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=363636&text_color=ffffff&primary_color=0058da" 
-                  style={{ minWidth: '320px', height: '900px' }}
-                ></div>
+                <div id="cal-inline-assessment" style={{ width: '100%', height: '900px', overflow: 'scroll' }} />
               </div>
             </div>
             <p className="text-center text-zinc-600 text-sm italic">

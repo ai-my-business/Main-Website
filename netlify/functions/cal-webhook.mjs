@@ -11,30 +11,21 @@ const OWNER_EMAIL = 'hello@ai-my-business.com.au';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Signature verification
-// Calendly signs webhooks with HMAC-SHA256.
-// Header format: "t=TIMESTAMP,v1=SIGNATURE"
-// Message signed: "<timestamp>.<rawBody>"
+// Cal.com signs webhooks with HMAC-SHA256.
+// Header: "X-Cal-Signature-256: sha256=<hex>"
+// Message signed: raw body only (no timestamp prefix)
 // ─────────────────────────────────────────────────────────────────────────────
 
 function verifySignature(rawBody, signatureHeader, signingKey) {
   if (!signatureHeader || !signingKey) return !signingKey; // skip if no key configured
 
   try {
-    const parts = {};
-    for (const part of signatureHeader.split(',')) {
-      const idx = part.indexOf('=');
-      if (idx !== -1) parts[part.slice(0, idx)] = part.slice(idx + 1);
-    }
-
-    const { t, v1 } = parts;
-    if (!t || !v1) return false;
-
-    const expected = createHmac('sha256', signingKey)
-      .update(`${t}.${rawBody}`, 'utf8')
+    const expected = 'sha256=' + createHmac('sha256', signingKey)
+      .update(rawBody, 'utf8')
       .digest('hex');
 
-    const expectedBuf = Buffer.from(expected, 'hex');
-    const receivedBuf = Buffer.from(v1, 'hex');
+    const expectedBuf = Buffer.from(expected, 'utf8');
+    const receivedBuf = Buffer.from(signatureHeader, 'utf8');
 
     if (expectedBuf.length !== receivedBuf.length) return false;
     return timingSafeEqual(expectedBuf, receivedBuf);
@@ -45,34 +36,49 @@ function verifySignature(rawBody, signatureHeader, signingKey) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Extract normalised booking data from the Calendly payload
+// Extract normalised booking data from the cal.com payload
 // ─────────────────────────────────────────────────────────────────────────────
 
 function extractBooking(payload) {
-  const event = payload.scheduled_event || {};
+  const attendee = (payload.attendees || [])[0] || {};
+  const uid = payload.uid || '';
+
   return {
-    name:               payload.name || 'Guest',
-    email:              payload.email || '',
-    timezone:           payload.timezone || 'Australia/Sydney',
-    eventName:          event.name || payload.event_type?.name || '',
-    startTime:          event.start_time || '',
-    endTime:            event.end_time || '',
-    location:           event.location || null,
-    cancelUrl:          payload.cancel_url || '',
-    rescheduleUrl:      payload.reschedule_url || '',
-    questionsAndAnswers: payload.questions_and_answers || [],
+    name:                attendee.name || 'Guest',
+    email:               attendee.email || '',
+    timezone:            attendee.timeZone || 'Australia/Sydney',
+    eventName:           payload.type || payload.title || '',
+    startTime:           payload.startTime || '',
+    endTime:             payload.endTime || '',
+    location:            payload.location || null,
+    cancelUrl:           payload.cancelUrl || `https://cal.com/booking/${uid}?cancel=true`,
+    rescheduleUrl:       payload.rescheduleUrl || `https://cal.com/reschedule/${uid}`,
+    questionsAndAnswers: extractQA(payload.responses),
   };
+}
+
+// Convert cal.com responses object → Q&A array shape used by email templates
+function extractQA(responses) {
+  if (!responses || typeof responses !== 'object') return [];
+  return Object.entries(responses)
+    .filter(([key]) => !['name', 'email'].includes(key))
+    .map(([key, val], index) => ({
+      position: index,
+      question: (val && val.label) || key,
+      answer:   Array.isArray(val?.value) ? val.value.join(', ') : (val?.value || ''),
+    }))
+    .filter(qa => qa.answer);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Detect which meeting type was booked
-// Add extra name variants here if you rename events in Calendly.
+// Matches cal.com event slugs (45min, 15min) and descriptive fallbacks.
 // ─────────────────────────────────────────────────────────────────────────────
 
 function detectEventType(eventName) {
   const lower = eventName.toLowerCase();
-  if (lower.includes('assessment')) return 'assessment';
-  if (lower.includes('discovery'))  return 'discovery';
+  if (lower.includes('45min') || lower.includes('45-min') || lower.includes('assessment')) return 'assessment';
+  if (lower.includes('15min') || lower.includes('15-min') || lower.includes('discovery'))  return 'discovery';
   return null;
 }
 
@@ -87,16 +93,15 @@ export const handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  const rawBody        = event.body || '';
-  const signatureHeader = event.headers['calendly-webhook-signature'] || '';
-  const signingKey     = process.env.CALENDLY_WEBHOOK_SIGNING_KEY || '';
+  const rawBody         = event.body || '';
+  const signatureHeader = event.headers['x-cal-signature-256'] || '';
+  const signingKey      = process.env.CAL_WEBHOOK_SECRET || '';
 
   if (!verifySignature(rawBody, signatureHeader, signingKey)) {
-    console.error('Calendly webhook: invalid signature');
+    console.error('Cal.com webhook: invalid signature');
     return { statusCode: 401, headers, body: JSON.stringify({ error: 'Invalid signature' }) };
   }
 
-  // Parse body
   let webhookPayload;
   try {
     webhookPayload = JSON.parse(rawBody);
@@ -104,19 +109,19 @@ export const handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON body' }) };
   }
 
-  const { event: webhookEvent, payload } = webhookPayload;
+  const { triggerEvent, payload } = webhookPayload;
 
-  // Only act on new bookings (ignore cancellations, reschedules etc.)
-  if (webhookEvent !== 'invitee.created') {
-    console.log(`Calendly webhook: ignoring event type "${webhookEvent}"`);
-    return { statusCode: 200, headers, body: JSON.stringify({ message: `Event "${webhookEvent}" ignored` }) };
+  // Only act on new bookings
+  if (triggerEvent !== 'BOOKING_CREATED') {
+    console.log(`Cal.com webhook: ignoring trigger "${triggerEvent}"`);
+    return { statusCode: 200, headers, body: JSON.stringify({ message: `Trigger "${triggerEvent}" ignored` }) };
   }
 
   const booking   = extractBooking(payload);
   const eventType = detectEventType(booking.eventName);
 
   if (!eventType) {
-    console.warn(`Calendly webhook: unknown event name "${booking.eventName}" — no email sent`);
+    console.warn(`Cal.com webhook: unknown event name "${booking.eventName}" — no email sent`);
     return {
       statusCode: 200,
       headers,
@@ -124,14 +129,12 @@ export const handler = async (event) => {
     };
   }
 
-  // Build email content
   const confirmationEmail = eventType === 'assessment'
     ? buildAssessmentEmail(booking)
     : buildDiscoveryEmail(booking);
 
   const notificationEmail = buildOwnerNotification(booking, eventType);
 
-  // Send both emails concurrently
   const [confirmResult, notifyResult] = await Promise.allSettled([
     resend.emails.send({
       from:    FROM_EMAIL,
@@ -147,7 +150,6 @@ export const handler = async (event) => {
     }),
   ]);
 
-  // Collect any send errors
   const errors = [];
 
   if (confirmResult.status === 'rejected') {
