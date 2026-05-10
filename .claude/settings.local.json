@@ -4,7 +4,9 @@
       "PowerShell(cd \"C:\\\\Users\\\\guest1\\\\Documents\\\\AI_My_Business\\\\GoogleAIStudio_website\"; Get-ChildItem -Recurse -File | Select-Object -First 50 | ForEach-Object { $_.FullName })",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl *)",
+      "Bash(git commit -m 'Fix: remove EDIT comments rendered as visible text in client emails *)"
     ]
   }
 }
