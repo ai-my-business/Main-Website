@@ -897,6 +897,7 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
   const [showResults, setShowResults] = useState(false);
   const [contactInfo, setContactInfo] = useState({ name: '', email: '' });
   const [actionPlan, setActionPlan] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => { window.scrollTo(0, 0); }, [step, showResults]);
 
@@ -950,6 +951,16 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
 
   const generateActionPlan = async () => {
     setIsSubmitting(true);
+
+    // Fire email in background — doesn't block the UI
+    fetch('/.netlify/functions/send-quiz-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: contactInfo.name, email: contactInfo.email, answers }),
+    })
+      .then(r => { if (r.ok) setEmailSent(true); })
+      .catch(() => {});
+
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       
@@ -1020,7 +1031,11 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="p-6 glass rounded-2xl border-white/5">
                     <p className="font-bold text-white mb-2">Check Your Email</p>
-                    <p className="text-sm text-zinc-500">We've sent a detailed copy of this plan to {contactInfo.email}.</p>
+                    <p className="text-sm text-zinc-500">
+                      {emailSent
+                        ? `A copy of this plan has been sent to ${contactInfo.email}.`
+                        : `Your action plan is being sent to ${contactInfo.email} — check your inbox shortly.`}
+                    </p>
                   </div>
                   <div className="p-6 glass rounded-2xl border-blue-500/20 bg-blue-500/5">
                     <p className="font-bold text-white mb-2">Want a Deep Dive?</p>
