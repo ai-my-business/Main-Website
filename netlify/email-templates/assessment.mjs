@@ -37,13 +37,9 @@ export function buildAssessmentEmail(booking) {
     <!-- Hero card -->
     ${card({ borderColor: '#1e3a5f', body: `
       <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:${BRAND.accentColor};">Booking Confirmed</p>
-
-      /* ── EDIT: main heading ── */
       <h1 style="margin:0 0 12px;font-size:26px;font-weight:800;color:${BRAND.textPrimary};line-height:1.25;">
         You're locked in, ${firstName}.
       </h1>
-
-      /* ── EDIT: intro paragraph ── */
       <p style="margin:0;color:${BRAND.textSecondary};font-size:15px;line-height:1.7;">
         Your <strong style="color:${BRAND.textPrimary};">45-Minute AI Assessment</strong> is confirmed.
         We'll spend this session mapping your exact business workflows, identifying where AI can save
@@ -65,8 +61,6 @@ export function buildAssessmentEmail(booking) {
     <!-- What to expect -->
     ${card({ body: `
       <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#8b5cf6;">What to Expect</p>
-
-      /* ── EDIT: agenda items ── */
       <h3 style="margin:0 0 16px;font-size:15px;font-weight:700;color:${BRAND.textPrimary};">We'll cover in your session:</h3>
       <ul style="margin:0;padding-left:20px;">
         <li style="margin-bottom:10px;color:${BRAND.textSecondary};font-size:14px;line-height:1.6;">
@@ -87,8 +81,6 @@ export function buildAssessmentEmail(booking) {
     <!-- Prep tip -->
     ${card({ borderColor: '#2e1065', body: `
       <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#8b5cf6;">Before We Meet</p>
-
-      /* ── EDIT: preparation advice ── */
       <h3 style="margin:0 0 12px;font-size:15px;font-weight:700;color:${BRAND.textPrimary};">Get the most out of your session</h3>
       <p style="margin:0 0 10px;color:${BRAND.textSecondary};font-size:14px;line-height:1.7;">
         Take 5 minutes to jot down answers to these before we speak:
@@ -116,7 +108,6 @@ export function buildAssessmentEmail(booking) {
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
         style="background:${BRAND.accentColorDark};border-radius:16px;padding:28px 24px;text-align:center;">
         <tr><td>
-          /* ── EDIT: closing CTA ── */
           <h3 style="margin:0 0 8px;font-size:18px;font-weight:800;color:#ffffff;">Questions before we meet?</h3>
           <p style="margin:0 0 18px;color:#bfdbfe;font-size:14px;line-height:1.7;">
             Reply to this email or reach out directly — we typically respond within a few hours.

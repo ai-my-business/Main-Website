@@ -37,13 +37,9 @@ export function buildDiscoveryEmail(booking) {
     <!-- Hero card -->
     ${card({ borderColor: '#166534', body: `
       <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#4ade80;">Booking Confirmed</p>
-
-      /* ── EDIT: main heading ── */
       <h1 style="margin:0 0 12px;font-size:26px;font-weight:800;color:${BRAND.textPrimary};line-height:1.25;">
         Great to meet you, ${firstName}.
       </h1>
-
-      /* ── EDIT: intro paragraph ── */
       <p style="margin:0;color:${BRAND.textSecondary};font-size:15px;line-height:1.7;">
         Your <strong style="color:${BRAND.textPrimary};">Free 15-Minute Discovery Call</strong> is confirmed.
         This is a relaxed, no-pressure conversation to understand your business and see if we're the right fit
@@ -65,8 +61,6 @@ export function buildDiscoveryEmail(booking) {
     <!-- What we'll cover -->
     ${card({ body: `
       <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#4ade80;">What We'll Cover</p>
-
-      /* ── EDIT: agenda items ── */
       <h3 style="margin:0 0 16px;font-size:15px;font-weight:700;color:${BRAND.textPrimary};">In just 15 minutes we'll:</h3>
       <ul style="margin:0;padding-left:20px;">
         <li style="margin-bottom:10px;color:${BRAND.textSecondary};font-size:14px;line-height:1.6;">
@@ -84,8 +78,6 @@ export function buildDiscoveryEmail(booking) {
     <!-- Prep tip -->
     ${card({ borderColor: '#14532d', body: `
       <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#4ade80;">One Quick Thing</p>
-
-      /* ── EDIT: preparation tip ── */
       <p style="margin:0;color:${BRAND.textSecondary};font-size:14px;line-height:1.7;">
         If you have a moment before the call, think about the <strong style="color:${BRAND.textPrimary};">one task in your business
         that eats the most time each week</strong>. That's usually where we start, and it gives us the fastest
@@ -109,7 +101,6 @@ export function buildDiscoveryEmail(booking) {
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
         style="background:#14532d;border:1px solid #166534;border-radius:16px;padding:28px 24px;text-align:center;">
         <tr><td>
-          /* ── EDIT: closing CTA ── */
           <h3 style="margin:0 0 8px;font-size:18px;font-weight:800;color:#ffffff;">See you soon!</h3>
           <p style="margin:0 0 18px;color:#bbf7d0;font-size:14px;line-height:1.7;">
             If anything comes up or you have questions beforehand, just reply to this email.
