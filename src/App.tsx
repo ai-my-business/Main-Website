@@ -1153,11 +1153,39 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
 
 const ContactPage = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  const [form, setForm]     = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('sending');
+    setErrorMsg('');
+    try {
+      const res = await fetch('/.netlify/functions/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus('sent');
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+        setStatus('error');
+      }
+    } catch {
+      setErrorMsg('Could not reach the server. Please try again.');
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="pt-40 pb-32 px-6">
       <div className="max-w-4xl mx-auto">
         <SectionHeading badge="Get In Touch" align="center">We'd Love to Hear From You</SectionHeading>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-8">
             <div>
@@ -1166,7 +1194,7 @@ const ContactPage = () => {
                 Whether you have a specific question about an automation or just want to see if we're the right fit, drop us a line. We respond to all inquiries within 24 hours.
               </p>
             </div>
-            
+
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
@@ -1190,21 +1218,71 @@ const ContactPage = () => {
           </div>
 
           <div className="glass p-10 rounded-[2.5rem] border-white/10 bg-white/[0.02]">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest px-2">Name</label>
-                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500/50 transition-colors" placeholder="John Doe" />
+            {status === 'sent' ? (
+              <div className="flex flex-col items-center justify-center h-full text-center space-y-5 py-8">
+                <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center">
+                  <CheckCircle2 className="w-8 h-8 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Message Sent</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    Thanks, {form.name.split(' ')[0]}. We'll get back to you within 24 hours.
+                  </p>
+                </div>
+                <button
+                  onClick={() => { setForm({ name: '', email: '', message: '' }); setStatus('idle'); }}
+                  className="text-blue-400 text-sm hover:underline"
+                >
+                  Send another message
+                </button>
               </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest px-2">Email</label>
-                <input type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500/50 transition-colors" placeholder="john@example.com" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest px-2">Message</label>
-                <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500/50 transition-colors" placeholder="Tell us about your business..." />
-              </div>
-              <button className="w-full py-4 bg-white text-black font-bold rounded-xl hover:bg-zinc-200 transition-all">Send Message</button>
-            </form>
+            ) : (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest px-2">Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                    placeholder="John Doe"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest px-2">Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                    placeholder="john@example.com"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest px-2">Message</label>
+                  <textarea
+                    rows={4}
+                    required
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
+                    placeholder="Tell us about your business..."
+                  />
+                </div>
+                {status === 'error' && (
+                  <p className="text-red-400 text-sm px-2">{errorMsg}</p>
+                )}
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="w-full py-4 bg-white text-black font-bold rounded-xl hover:bg-zinc-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>

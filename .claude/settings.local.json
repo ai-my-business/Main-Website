@@ -6,7 +6,8 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Bash(curl *)",
-      "Bash(git commit -m 'Fix: remove EDIT comments rendered as visible text in client emails *)"
+      "Bash(git commit -m 'Fix: remove EDIT comments rendered as visible text in client emails *)",
+      "Bash(git rm *)"
     ]
   }
 }
