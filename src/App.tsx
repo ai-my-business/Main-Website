@@ -210,7 +210,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                {
                  icon: Rocket,
                  title: "4. Implementation & Review",
-                 text: "We build and deploy your AI systems, then review performance to ensure you’re seeing real, measurable results.",
+                 text: "We build and deploy your AI systems, then review performance to ensure you're seeing real, measurable results.",
                  action: () => onNavigate("book")
                }
              ].map((item, i) => (
@@ -227,6 +227,14 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
           <p className="text-center text-sm text-blue-400/80 font-medium tracking-wide mt-10">
             Value Guarantee — If you don't find the audit valuable, we'll refund you.
           </p>
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={() => onNavigate('book')}
+              className="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center gap-2"
+            >
+              Book Now <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
        </div>
     </section>
 
@@ -234,16 +242,16 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
     <section className="py-24 px-6">
        <div className="max-w-7xl mx-auto">
           <SectionHeading badge="The Audience">Who this is designed for</SectionHeading>
-          
+
           <div className="max-w-3xl mx-auto">
              <div className="p-10 glass rounded-[2.5rem] border-green-500/10 bg-green-500/[0.01]">
-                <h3 className="text-2xl font-bold mb-8 text-green-400">You’ll feel right at home if…</h3>
+                <h3 className="text-2xl font-bold mb-8 text-green-400">You'll feel right at home if…</h3>
                 <ul className="space-y-6">
                    {[
-                     "You’re juggling a solo or small business and don’t know what to start with AI.",
-                     "You’ve experimented with tools like ChatGPT but don’t have a clear system in place.",
-                     "You’re frustrated with tutorials that assume you already know a dozen other tools.",
-                     "You’re after quick, practical wins this week—not another 10-hour course. You want value not content."
+                     "You're juggling a solo or small business and don't know what to start with AI.",
+                     "You've experimented with tools like ChatGPT but don't have a clear system in place.",
+                     "You're frustrated with tutorials that assume you already know a dozen other tools.",
+                     "You're after quick, practical wins this week—not another 10-hour course. You want value not content."
                    ].map((item, i) => (
                       <li key={i} className="flex items-start gap-4">
                          <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 mt-1">
@@ -253,6 +261,14 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                       </li>
                    ))}
                 </ul>
+             </div>
+             <div className="flex justify-center mt-8">
+               <button
+                 onClick={() => onNavigate('problem')}
+                 className="px-8 py-4 glass text-white font-bold rounded-full hover:bg-white/10 transition-all border border-white/10 flex items-center gap-2"
+               >
+                 See Where You're Wasting Time <ArrowRight className="w-4 h-4" />
+               </button>
              </div>
           </div>
        </div>
@@ -283,7 +299,7 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
            <div className="lg:col-span-8 space-y-12">
               <div className="space-y-6">
-                 <h3 className="text-3xl font-bold text-white leading-tight">You can see how powerful AI is—but you haven’t put it to work in your business yet.</h3>
+                 <h3 className="text-3xl font-bold text-white leading-tight">You can see how powerful AI is—but you haven't put it to work in your business yet.</h3>
                  <p className="text-xl text-zinc-400 leading-relaxed font-light">
                     lets help you see the power.
                  </p>
@@ -295,7 +311,7 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                  </div>
                  <div className="relative z-10 space-y-6">
                     <p className="text-xl text-zinc-300 leading-relaxed">
-                       Because the real issue isn’t access to AI—it’s <strong>clarity on what to actually do first.</strong>
+                       Because the real issue isn't access to AI—it's <strong>clarity on what to actually do first.</strong>
                     </p>
                     <div className="space-y-4">
                        <p className="text-zinc-400">So you stay stuck doing 10+ hours a week of work that should take minutes:</p>
@@ -326,7 +342,7 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
 
               {/* Five problem areas */}
               <div className="space-y-6">
-                 <h3 className="text-2xl font-bold text-white">Here’s where it’s costing you most:</h3>
+                 <h3 className="text-2xl font-bold text-white">Here's where it's costing you most:</h3>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {[
                       {
@@ -366,7 +382,7 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                         problems: [
                           "Key numbers scattered across spreadsheets, CRMs, and inboxes",
                           "Weekly reports rebuilt from scratch every single time",
-                          "Decisions made on last week’s data — or worse, gut feel"
+                          "Decisions made on last week's data — or worse, gut feel"
                         ]
                       }
                     ].map((area, i) => (
@@ -560,11 +576,11 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
               </h3>
               <ul className="space-y-4 text-zinc-200">
                 {[
-                  "You’re earning $150K–$500K/year and overwhelmed with admin tasks and low value work",
-                  "You’ve used ChatGPT but aren’t sure how to weave AI into your daily workflows. Things still feel manual.",
+                  "You're earning $150K–$500K/year and overwhelmed with admin tasks and low value work",
+                  "You've used ChatGPT but aren't sure how to weave AI into your daily workflows. Things still feel manual.",
                   "You keep saving tools but never actually implement them",
                   "You want a clear starting point—not another course that overloads you",
-                  "You’re ready to put in a few hours THIS WEEK to save countless hours later",
+                  "You're ready to put in a few hours THIS WEEK to save countless hours later",
                   "You care about actual results instead of tech",
                   "Information is scattered across many places and spending lots of time on repetitive /low value tasks"
                 ].map((item, i) => (
@@ -594,16 +610,16 @@ const FAQPage = () => {
         <div className="glass rounded-[3rem] p-8 md:p-14 border-white/10 mb-20">
           {[
             { 
-              question: "What if I’m not technical at all?", 
-              answer: "That’s actually ideal—this was built with you in mind. Everything is explained in plain business language, not developer jargon. Every step is broken down so it’s easy to follow. If you can follow a simple set of instructions, you can make this work." 
+              question: "What if I'm not technical at all?", 
+              answer: "That's actually ideal—this was built with you in mind. Everything is explained in plain business language, not developer jargon. Every step is broken down so it's easy to follow. If you can follow a simple set of instructions, you can make this work." 
             },
             { 
               question: "How is this different from watching YouTube tutorials?", 
               answer: "Most tutorials offer broad advice for broad audiences. This is tailored to you—your workflows, your bottlenecks, your business. Instead of generic chips, you get a focused, personalised roadmap built around your exact situation." 
             },
             { 
-              question: "What if I’ve tried automation before and it didn’t work?", 
-              answer: "Automation often fails because the underlying process isn’t solid. Our approach is Audit, Improve, Automate—we fix the workflow first, then layer automation on top. The goal isn’t just speed—it’s better systems overall."
+              question: "What if I've tried automation before and it didn't work?", 
+              answer: "Automation often fails because the underlying process isn't solid. Our approach is Audit, Improve, Automate—we fix the workflow first, then layer automation on top. The goal isn't just speed—it's better systems overall."
             },
             { 
               question: "How is this different from an AI online course?", 
@@ -615,7 +631,7 @@ const FAQPage = () => {
             },
             { 
               question: "Do you build the automations for me?", 
-              answer: "This gives you a clear plan to execute on your own, and most people can implement the quick wins without outside help. If you prefer a done-for-you option, we can connect you with trusted partners—but that’s a separate service and investment." 
+              answer: "This gives you a clear plan to execute on your own, and most people can implement the quick wins without outside help. If you prefer a done-for-you option, we can connect you with trusted partners—but that's a separate service and investment." 
             },
             { 
               question: "What industries do you work with?", 
@@ -769,7 +785,7 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                   role: "E-commerce Founder"
                 },
                 {
-                  quote: "I was expecting 'ChatGPT tips.' But instead I got systems that are practical. I didn’t realise how much I didn’t know.",
+                  quote: "I was expecting 'ChatGPT tips.' But instead I got systems that are practical. I didn't realise how much I didn't know.",
                   author: "David L.",
                   role: "Real Estate Professional"
                 },
@@ -1493,7 +1509,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
                 { icon: Video, title: "1. 30-Min Discovery Call", desc: "A focused conversation to understand your business, current tools, and biggest time drains before we dive deeper." },
                 { icon: Search, title: "2. Audit", desc: "A thorough business deep dive into your real workflows, identifying exactly where AI can deliver the highest ROI." },
                 { icon: FileText, title: "3. Proposal", desc: "A clear, tailored proposal outlining the recommended AI systems, expected time savings, and implementation roadmap." },
-                { icon: Rocket, title: "4. Implementation & Review", desc: "We build and deploy your AI systems, then review performance to ensure you’re seeing real, measurable results." }
+                { icon: Rocket, title: "4. Implementation & Review", desc: "We build and deploy your AI systems, then review performance to ensure you're seeing real, measurable results." }
               ].map((item, i) => (
                 <div key={i} className="space-y-4">
                   <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
@@ -1512,7 +1528,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
               <h2 className="text-3xl md:text-5xl font-bold mb-10 leading-tight">Ready to Stop Drowning in Admin Work?</h2>
               
               <div className="space-y-8 mb-12">
-                <p className="text-xl text-zinc-400 font-light">You’ve got two choices:</p>
+                <p className="text-xl text-zinc-400 font-light">You've got two choices:</p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                   <div className="p-6 glass rounded-2xl border-white/5 flex gap-4">
