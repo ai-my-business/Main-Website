@@ -60,7 +60,6 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
           <button onClick={() => handleNav('solution')} className={`hover:text-white transition-colors ${currentView === 'solution' ? 'text-white underline underline-offset-4' : ''}`}>The Solution</button>
           <button onClick={() => handleNav('results')} className={`hover:text-white transition-colors ${currentView === 'results' ? 'text-white underline underline-offset-4' : ''}`}>The Results</button>
           <button onClick={() => handleNav('quiz')} className={`hover:text-white transition-colors ${currentView === 'quiz' ? 'text-white underline underline-offset-4' : ''}`}>AI Quiz</button>
-          <button onClick={() => handleNav('book')} className={`hover:text-white transition-colors ${currentView === 'book' ? 'text-white underline underline-offset-4' : ''}`}>AI Audit</button>
           <button onClick={() => handleNav('about')} className={`hover:text-white transition-colors ${currentView === 'about' ? 'text-white underline underline-offset-4' : ''}`}>About</button>
           <button onClick={() => handleNav('contact')} className={`hover:text-white transition-colors ${currentView === 'contact' ? 'text-white underline underline-offset-4' : ''}`}>Contact</button>
           <button 
@@ -85,7 +84,6 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
             <button onClick={() => handleNav('solution')} className="text-lg font-medium">The Solution</button>
             <button onClick={() => handleNav('results')} className="text-lg font-medium">The Results</button>
             <button onClick={() => handleNav('quiz')} className="text-lg font-medium">AI Quiz</button>
-            <button onClick={() => handleNav('book')} className="text-lg font-medium">AI Audit</button>
             <button onClick={() => handleNav('about')} className="text-lg font-medium">About Us</button>
             <button onClick={() => handleNav('contact')} className="text-lg font-medium">Contact</button>
             <button 
@@ -304,8 +302,10 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                        <ul className="space-y-3">
                           {[
                             "Following up with leads manually",
-                            "Formatting and re-formatting documents",
-                            "Answering the same repetitive questions"
+                            "Posting to social media inconsistently — or not at all",
+                            "Missing calls and losing enquiries after hours",
+                            "Pulling data from spreadsheets by hand every week",
+                            "Answering the same repetitive questions over and over"
                           ].map((item, i) => (
                              <li key={i} className="flex items-center gap-3 text-zinc-200 font-medium">
                                 <XCircle className="w-5 h-5 text-red-500/50" />
@@ -322,6 +322,70 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                  <p className="text-lg text-zinc-400 leading-relaxed">
                     Meanwhile, competitors are quietly automating those exact tasks and pulling ahead.
                  </p>
+              </div>
+
+              {/* Five problem areas */}
+              <div className="space-y-6">
+                 <h3 className="text-2xl font-bold text-white">Here’s where it’s costing you most:</h3>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {[
+                      {
+                        title: "Lead Generation",
+                        problems: [
+                          "Manually trawling LinkedIn and databases for prospects",
+                          "Inconsistent outreach with no repeatable system",
+                          "Paying for cold leads that are already stale"
+                        ]
+                      },
+                      {
+                        title: "Lead Follow-Up",
+                        problems: [
+                          "Warm leads fall through the cracks after the first touch",
+                          "No consistent follow-up process — just memory and good intentions",
+                          "Revenue lost to competitors who simply stayed in touch"
+                        ]
+                      },
+                      {
+                        title: "Social Media Engine",
+                        problems: [
+                          "Hours creating content only to post sporadically",
+                          "No strategy — just posting whenever you remember",
+                          "Great ideas buried in notes, never repurposed or published"
+                        ]
+                      },
+                      {
+                        title: "Voice Receptionist",
+                        problems: [
+                          "Missing calls while in meetings or with clients",
+                          "Paying someone to answer repetitive FAQs all day",
+                          "After-hours enquiries go cold — no one picks up"
+                        ]
+                      },
+                      {
+                        title: "Data Dashboards",
+                        problems: [
+                          "Key numbers scattered across spreadsheets, CRMs, and inboxes",
+                          "Weekly reports rebuilt from scratch every single time",
+                          "Decisions made on last week’s data — or worse, gut feel"
+                        ]
+                      }
+                    ].map((area, i) => (
+                      <div key={i} className="p-6 glass rounded-2xl border-white/5">
+                        <h4 className="font-bold text-white text-sm mb-3 flex items-center gap-2">
+                          <XCircle className="w-4 h-4 text-red-500/50 shrink-0" />
+                          {area.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {area.problems.map((prob, j) => (
+                            <li key={j} className="text-xs text-zinc-500 leading-relaxed flex gap-2">
+                              <span className="text-zinc-700 shrink-0">—</span>
+                              {prob}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                 </div>
               </div>
 
               <div className="pt-16 border-t border-white/5 space-y-12">
@@ -407,7 +471,8 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
              {
                icon: Zap,
                title: "Automations & Improvements",
-               desc: "Connecting your tools so they talk to each other. From lead capture to client delivery, we build bridges that move data for you while you sleep."
+               desc: "Connecting your tools so they talk to each other. From lead capture to client delivery, we build bridges that move data for you while you sleep.",
+               examples: ["Lead Generation", "Lead Follow-Up", "Social Media Engine", "Voice Receptionist", "Data Dashboards"]
              },
              {
                icon: TrendingUp,
@@ -437,9 +502,19 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
                 <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:scale-110 transition-transform">
                    <service.icon className="w-7 h-7 text-blue-400" />
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-3 w-full">
                    <h3 className="text-xl font-bold text-white">{service.title}</h3>
                    <p className="text-sm text-zinc-500 leading-relaxed">{service.desc}</p>
+                   {'examples' in service && service.examples && (
+                     <div className="pt-3 space-y-2">
+                       <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-400/60">Examples we build</p>
+                       <div className="flex flex-wrap gap-2">
+                         {(service.examples as string[]).map((ex, j) => (
+                           <span key={j} className="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">{ex}</span>
+                         ))}
+                       </div>
+                     </div>
+                   )}
                 </div>
               </div>
            ))}
@@ -464,8 +539,8 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
                  Our pricing is transparent and discussed directly with you after we understand your unique workflows. No generic packages—just tailored value.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button onClick={() => onNavigate('assessment')} className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-3">
-                   Book Your Assessment <ArrowRight className="w-5 h-5" />
+                <button onClick={() => onNavigate('book')} className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-3">
+                   Book Now <ArrowRight className="w-5 h-5" />
                 </button>
                 <button onClick={() => onNavigate('quiz')} className="px-10 py-5 glass text-white font-bold rounded-full hover:bg-white/10 transition-all border border-white/10">
                    Free AI Audit Quiz
@@ -477,28 +552,7 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
         {/* Is This Right for You? */}
         <div className="mt-32 space-y-8">
           <SectionHeading badge="Compatibility">Is This Right for You?</SectionHeading>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Negative Fit */}
-            <div className="p-10 glass border-red-500/10 rounded-[2.5rem] bg-red-500/[0.01]">
-              <h3 className="text-xl font-bold mb-8 text-red-400 uppercase tracking-widest flex items-center gap-2">
-                <XCircle className="w-5 h-5" />
-                This is NOT for you if…
-              </h3>
-              <ul className="space-y-4 text-zinc-500">
-                {[
-                  "You’re hoping for instant results or “push-button” success",
-                  "You’re unwilling to invest 30–60 minutes learning a tool to reclaim 5–10 hours weekly",
-                  "You haven’t started generating revenue or built processes worth optimizing"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <X className="w-5 h-5 shrink-0 mt-1 text-red-500/50" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            {/* Positive Fit */}
+          <div className="max-w-2xl mx-auto">
             <div className="p-10 glass border-green-500/10 rounded-[2.5rem] bg-green-500/[0.01]">
               <h3 className="text-xl font-bold mb-8 text-green-400 uppercase tracking-widest flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5" />
@@ -549,7 +603,7 @@ const FAQPage = () => {
             },
             { 
               question: "What if I’ve tried automation before and it didn’t work?", 
-              answer: "Automation often fails because the underlying process isn’t solid. Our approach is “Audit, Improve, Automate”—we fix the workflow first, then layer automation on top. The goal isn’t just speed—it’s better systems overall." 
+              answer: "Automation often fails because the underlying process isn’t solid. Our approach is Audit, Improve, Automate—we fix the workflow first, then layer automation on top. The goal isn’t just speed—it’s better systems overall."
             },
             { 
               question: "How is this different from an AI online course?", 
