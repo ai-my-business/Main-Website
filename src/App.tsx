@@ -4,7 +4,6 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, 
   Clock,
@@ -61,7 +60,7 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
           <button onClick={() => handleNav('solution')} className={`hover:text-white transition-colors ${currentView === 'solution' ? 'text-white underline underline-offset-4' : ''}`}>The Solution</button>
           <button onClick={() => handleNav('results')} className={`hover:text-white transition-colors ${currentView === 'results' ? 'text-white underline underline-offset-4' : ''}`}>The Results</button>
           <button onClick={() => handleNav('quiz')} className={`hover:text-white transition-colors ${currentView === 'quiz' ? 'text-white underline underline-offset-4' : ''}`}>AI Quiz</button>
-          <button onClick={() => handleNav('assessment')} className={`hover:text-white transition-colors ${currentView === 'assessment' ? 'text-white underline underline-offset-4' : ''}`}>AI Audit</button>
+          <button onClick={() => handleNav('book')} className={`hover:text-white transition-colors ${currentView === 'book' ? 'text-white underline underline-offset-4' : ''}`}>AI Audit</button>
           <button onClick={() => handleNav('about')} className={`hover:text-white transition-colors ${currentView === 'about' ? 'text-white underline underline-offset-4' : ''}`}>About</button>
           <button onClick={() => handleNav('contact')} className={`hover:text-white transition-colors ${currentView === 'contact' ? 'text-white underline underline-offset-4' : ''}`}>Contact</button>
           <button 
@@ -79,20 +78,14 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
       </div>
 
       {/* Mobile Nav */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-20 left-6 right-6 glass rounded-2xl p-6 flex flex-col gap-6 items-center border border-white/10"
-          >
+      {isOpen && (
+        <div className="md:hidden absolute top-20 left-6 right-6 glass rounded-2xl p-6 flex flex-col gap-6 items-center border border-white/10">
             <button onClick={() => handleNav('home')} className="text-lg font-medium">Home</button>
             <button onClick={() => handleNav('problem')} className="text-lg font-medium">The Problem</button>
             <button onClick={() => handleNav('solution')} className="text-lg font-medium">The Solution</button>
             <button onClick={() => handleNav('results')} className="text-lg font-medium">The Results</button>
             <button onClick={() => handleNav('quiz')} className="text-lg font-medium">AI Quiz</button>
-            <button onClick={() => handleNav('assessment')} className="text-lg font-medium">AI Audit</button>
+            <button onClick={() => handleNav('book')} className="text-lg font-medium">AI Audit</button>
             <button onClick={() => handleNav('about')} className="text-lg font-medium">About Us</button>
             <button onClick={() => handleNav('contact')} className="text-lg font-medium">Contact</button>
             <button 
@@ -101,9 +94,8 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
             >
               Book Now
             </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </nav>
   );
 };
@@ -111,23 +103,13 @@ const Navbar = ({ onNavigate, currentView }: { onNavigate: (view: string) => voi
 const SectionHeading = ({ children, badge, align = 'center' }: { children: React.ReactNode, badge?: string, align?: 'center' | 'left' }) => (
   <div className={`flex flex-col ${align === 'center' ? 'items-center text-center' : 'items-start text-left'} mb-16 px-4`}>
     {badge && (
-      <motion.span 
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block"
-      >
+      <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block">
         {badge}
-      </motion.span>
+      </span>
     )}
-    <motion.h2 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-3xl md:text-5xl font-bold text-white max-w-2xl leading-tight"
-    >
+    <h2 className="text-3xl md:text-5xl font-bold text-white max-w-2xl leading-tight">
       {children}
-    </motion.h2>
+    </h2>
   </div>
 );
 
@@ -143,20 +125,13 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
         <span className="text-lg font-medium pr-8">{question}</span>
         <ChevronDown className={`w-5 h-5 transition-transform duration-300 text-zinc-500 ${isOpen ? 'rotate-180 text-white' : ''}`} />
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
-          >
-            <p className="pb-6 text-zinc-400 leading-relaxed max-w-2xl">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div className="overflow-hidden">
+          <p className="pb-6 text-zinc-400 leading-relaxed max-w-2xl">
+            {answer}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
@@ -178,11 +153,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
       <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        <div>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8">
             Win Back <span className="text-gradient">5–10 Hours</span> a Week,<br className="hidden lg:block" /> Save Time and <span className="text-gradient">Automate</span> Your Business.
           </h1>
@@ -192,10 +163,10 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
             <button
-              onClick={() => onNavigate("assessment")}
+              onClick={() => onNavigate("book")}
               className="group relative w-full sm:w-auto px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 overflow-hidden shadow-xl shadow-white/5"
             >
-              <span>👉 Book Your Assessment</span>
+              <span>Book Now</span>
             </button>
             <button
               onClick={() => onNavigate("quiz")}
@@ -210,7 +181,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
             <span>✓ Money Back Guarantee</span>
             <span>✓ Results-Focused Solutions</span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
 
@@ -224,25 +195,25 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                  icon: Video,
                  title: "1. 30-Min Discovery Call",
                  text: "A focused conversation to understand your business, current tools, and biggest time drains before we dive deeper.",
-                 action: () => onNavigate("assessment")
+                 action: () => onNavigate("book")
                },
                {
                  icon: Search,
                  title: "2. Audit",
                  text: "A thorough business deep dive into your real workflows, identifying exactly where AI can deliver the highest ROI.",
-                 action: () => onNavigate("assessment")
+                 action: () => onNavigate("book")
                },
                {
                  icon: FileText,
                  title: "3. Proposal",
                  text: "A clear, tailored proposal outlining the recommended AI systems, expected time savings, and implementation roadmap.",
-                 action: () => onNavigate("assessment")
+                 action: () => onNavigate("book")
                },
                {
                  icon: Rocket,
                  title: "4. Implementation & Review",
                  text: "We build and deploy your AI systems, then review performance to ensure you’re seeing real, measurable results.",
-                 action: () => onNavigate("assessment")
+                 action: () => onNavigate("book")
                }
              ].map((item, i) => (
                 <div key={i} className="p-8 glass rounded-3xl border-white/5 flex flex-col h-full">
@@ -266,8 +237,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
        <div className="max-w-7xl mx-auto">
           <SectionHeading badge="The Audience">Who this is designed for</SectionHeading>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-             {/* Positive Fit */}
+          <div className="max-w-3xl mx-auto">
              <div className="p-10 glass rounded-[2.5rem] border-green-500/10 bg-green-500/[0.01]">
                 <h3 className="text-2xl font-bold mb-8 text-green-400">You’ll feel right at home if…</h3>
                 <ul className="space-y-6">
@@ -286,25 +256,6 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                    ))}
                 </ul>
              </div>
-
-             {/* Negative Fit */}
-             <div className="p-10 glass rounded-[2.5rem] border-red-500/10 bg-red-500/[0.01]">
-                <h3 className="text-2xl font-bold mb-8 text-red-500/80">This isn’t for you if…</h3>
-                <ul className="space-y-6">
-                   {[
-                     "You expect someone else to build everything while you stay hands-off.",
-                     "You’re not willing to spend 30–60 minutes learning something that could save you 5–10 hours.",
-                     "You’re chasing a magic solution instead of a realistic, actionable plan."
-                   ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-4">
-                         <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mt-1">
-                            <XCircle className="w-4 h-4 text-red-400" />
-                         </div>
-                         <span className="text-zinc-500 text-lg leading-relaxed">{item}</span>
-                      </li>
-                   ))}
-                </ul>
-             </div>
           </div>
        </div>
     </section>
@@ -312,7 +263,6 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
     {/* Support CTA Footer */}
     <section className="py-32 px-6">
        <div className="max-w-4xl mx-auto glass p-12 md:p-20 rounded-[4rem] text-center relative overflow-hidden border-white/10">
-          <div className="mesh-gradient-1 opacity-20" />
           <div className="relative z-10">
              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white">Stop Guessing Where to Start with AI</h2>
              <p className="text-lg text-zinc-400 mb-12">Take a quick quiz to identify what kind of opportunities are available for your business.</p>
@@ -480,12 +430,8 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
                desc: "AI moves fast. We provide ongoing maintenance and strategic updates to ensure your systems stay ahead of the curve as new tools emerge."
              }
            ].map((service, i) => (
-              <motion.div 
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
                 className="p-8 glass rounded-[2.5rem] border-white/5 flex flex-col items-start gap-6 hover:bg-white/[0.03] transition-all group"
               >
                 <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:scale-110 transition-transform">
@@ -495,7 +441,7 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
                    <h3 className="text-xl font-bold text-white">{service.title}</h3>
                    <p className="text-sm text-zinc-500 leading-relaxed">{service.desc}</p>
                 </div>
-              </motion.div>
+              </div>
            ))}
         </div>
 
@@ -784,12 +730,8 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                   role: "SaaS Sales Lead"
                 }
               ].map((test, i) => (
-                 <motion.div 
+                 <div
                    key={i}
-                   initial={{ opacity: 0, y: 20 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ delay: i * 0.1 }}
                    className="p-8 glass rounded-[2.5rem] border-white/5 bg-white/[0.01] flex flex-col justify-between"
                  >
                     <div className="space-y-6">
@@ -805,7 +747,7 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                           <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">{test.role}</p>
                        </div>
                     </div>
-                 </motion.div>
+                 </div>
               ))}
            </div>
         </div>
@@ -938,11 +880,7 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
     return (
       <div className="pt-40 pb-32 px-6">
         <div className="max-w-4xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="glass rounded-[3.5rem] p-10 md:p-20 border-white/10"
-          >
+          <div className="glass rounded-[3.5rem] p-10 md:p-20 border-white/10">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center border border-green-500/20">
                 <CheckCircle2 className="w-6 h-6 text-green-400" />
@@ -986,7 +924,7 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     );
@@ -1001,23 +939,16 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
             <span className="text-zinc-500 text-xs font-mono">{Math.min(step + 1, questions.length)} / {questions.length}</span>
           </div>
           <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-            <motion.div 
-              className="h-full bg-blue-500"
-              initial={{ width: 0 }}
-              animate={{ width: `${(step / questions.length) * 100}%` }}
+            <div
+              className="h-full bg-blue-500 transition-all duration-500"
+              style={{ width: `${(step / questions.length) * 100}%` }}
             />
           </div>
         </div>
 
-        <AnimatePresence mode="wait">
+        <div>
           {step < questions.length ? (
-            <motion.div
-              key={step}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-10"
-            >
+            <div className="space-y-10">
               <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
                 {questions[step].question}
               </h2>
@@ -1033,14 +964,9 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                   </button>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ) : (
-            <motion.div
-              key="contact"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="glass p-10 md:p-16 rounded-[3rem] border-white/10"
-            >
+            <div className="glass p-10 md:p-16 rounded-[3rem] border-white/10">
               <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold text-white mb-4">Almost Done!</h2>
                 <p className="text-zinc-400">Where should we send your quick action plan?</p>
@@ -1079,9 +1005,9 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                   By clicking, you agree to receive a one-time AI action plan and occasional system updates.
                 </p>
               </form>
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -1226,7 +1152,10 @@ const ContactPage = () => {
   );
 };
 
-const BookPage = () => {
+const BookPage = ({ hasPaid = false }: { hasPaid?: boolean }) => {
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState('');
+
   useEffect(() => {
     window.scrollTo(0, 0);
     (function (C: any, A: string, L: string) {
@@ -1245,26 +1174,53 @@ const BookPage = () => {
     Cal('ui', { theme: 'dark', styles: { branding: { brandColor: '#0058da' } }, hideEventTypeDetails: false, layout: 'month_view' });
   }, []);
 
+  useEffect(() => {
+    if (!hasPaid) return;
+    const Cal = (window as any).Cal;
+    if (!Cal) return;
+    Cal('inline', { elementOrSelector: '#cal-inline-audit', calLink: 'ai-my-business/audit', layout: 'month_view' });
+    Cal('ui', { theme: 'dark', styles: { branding: { brandColor: '#0058da' } }, hideEventTypeDetails: false, layout: 'month_view' });
+  }, [hasPaid]);
+
+  const handlePayment = async () => {
+    setPaymentLoading(true);
+    setPaymentError('');
+    try {
+      const res = await fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!res.ok) throw new Error('Payment setup failed');
+      const { url } = await res.json();
+      window.location.href = url;
+    } catch {
+      setPaymentError('Could not start payment. Please try again.');
+      setPaymentLoading(false);
+    }
+  };
+
   return (
     <div className="pt-40 pb-32 px-6">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading badge="Schedule" align="center">Ready to Reclaim Your Time?</SectionHeading>
-        
+
+        {/* Free 30-Min Chat */}
+        <SectionHeading badge="Free Chat" align="center">Not Sure Yet? Start Here.</SectionHeading>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
            <div className="lg:col-span-1 space-y-8">
               <div className="p-8 glass rounded-[2.5rem] border-blue-500/10 bg-blue-500/[0.01]">
-                 <h3 className="text-xl font-bold text-white mb-4">Uncertain?</h3>
+                 <h3 className="text-xl font-bold text-white mb-4">Free 30-Min Intro Chat</h3>
                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                    If you're not quite sure how AI applies to your specific setup, book a **Free 30-Minute Intro Chat**. No pressure, just a brief conversation to see what we can deliver for you.
+                    Not sure how AI applies to your setup? Start here. No pressure — just a brief conversation to see what's possible for your business.
                  </p>
                  <div className="space-y-4">
                     <p className="text-xs font-bold text-white uppercase tracking-widest">Questions?</p>
                     <p className="text-sm text-zinc-500">
-                       Email us at **hello@ai-my-business.com.au** or message us on the contact page.
+                       Email hello@ai-my-business.com.au or use the contact page.
                     </p>
                  </div>
               </div>
-              
+
               <div className="p-8 glass rounded-[2.5rem] border-white/5">
                  <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-600 mb-6 underline underline-offset-8">What to Expect</h3>
                  <ul className="space-y-4">
@@ -1293,7 +1249,7 @@ const BookPage = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <Lock className="w-3 h-3 text-zinc-600" />
-                    <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Secure Booking Portal</span>
+                    <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Free 30-Min Chat</span>
                   </div>
                   <div className="w-12 h-1 bg-white/5 rounded-full" />
                 </div>
@@ -1303,6 +1259,130 @@ const BookPage = () => {
               </div>
            </div>
         </div>
+
+        {/* AI Audit Section */}
+        <div className="border-t border-white/5 pt-24">
+          <div className="text-center mb-20">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block">AI Tools Assessment</span>
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8">
+              Get a Tailored Roadmap to Win Back <span className="text-gradient">5–10 Hours Each Week</span>
+            </h2>
+            <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
+              No Hiring, No Coding, No Need to Become an AI Pro. Just clear, actionable paths designed specifically for your business.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-12">
+
+            {/* How It Works */}
+            <div className="p-10 glass rounded-[2.5rem] bg-white/[0.02] border-white/10">
+              <div className="text-center mb-10">
+                <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-500/50 mb-3 block">How It Works</span>
+                <div className="flex items-center justify-center gap-4 text-white">
+                  <Sparkles className="w-6 h-6 text-blue-400" />
+                  <h3 className="text-2xl font-bold uppercase tracking-widest">How It Works</h3>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  { icon: Video, title: "1. 30-Min Discovery Call", desc: "A focused conversation to understand your business, current tools, and biggest time drains before we dive deeper." },
+                  { icon: Search, title: "2. Audit", desc: "A thorough business deep dive into your real workflows, identifying exactly where AI can deliver the highest ROI." },
+                  { icon: FileText, title: "3. Proposal", desc: "A clear, tailored proposal outlining the recommended AI systems, expected time savings, and implementation roadmap." },
+                  { icon: Rocket, title: "4. Implementation & Review", desc: "We build and deploy your AI systems, then review performance to ensure you're seeing real, measurable results." }
+                ].map((item, i) => (
+                  <div key={i} className="space-y-4">
+                    <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
+                      <item.icon className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <h4 className="text-lg font-bold">{item.title}</h4>
+                    <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA with price */}
+            <div className="p-12 md:p-20 glass rounded-[3.5rem] border-white/20 text-center">
+              <div className="max-w-2xl mx-auto">
+                <h2 className="text-3xl md:text-5xl font-bold mb-10 leading-tight">Ready to Stop Drowning in Admin Work?</h2>
+                <div className="space-y-8 mb-12">
+                  <p className="text-xl text-zinc-400 font-light">You've got two choices:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div className="p-6 glass rounded-2xl border-white/5 flex gap-4">
+                      <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mt-1">
+                        <X className="w-3.5 h-3.5 text-red-400" />
+                      </div>
+                      <p className="text-sm text-zinc-500">Keep spending 10+ hours every week on tasks that could be streamlined or automated.</p>
+                    </div>
+                    <div className="p-6 glass rounded-2xl border-blue-500/10 flex gap-4 bg-blue-500/[0.02]">
+                      <div className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0 mt-1">
+                        <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                      </div>
+                      <p className="text-sm text-zinc-200">Or invest 30 minutes with us and walk away with a clear, actionable plan to take back your time.</p>
+                    </div>
+                  </div>
+                  <p className="text-lg text-zinc-400 pt-4">
+                    The assessment is <span className="text-white font-bold">$300</span>. If this assessment helps you save just a couple hours per week, it pays for itself within the first week. Most clients uncover <span className="text-white font-bold">at least 5–10 hours</span> of weekly time savings.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment gate / calendar */}
+            <div className="space-y-12">
+              <SectionHeading badge="AI Audit Booking" align="center">Select a Time for Your Audit Session</SectionHeading>
+
+              {!hasPaid ? (
+                <div className="max-w-xl mx-auto text-center glass p-12 rounded-[3.5rem] border-white/10">
+                  <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-blue-500/20">
+                    <Lock className="w-8 h-8 text-blue-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Secure Your Audit Slot</h3>
+                  <p className="text-zinc-400 mb-8 leading-relaxed">
+                    Complete your $300 payment to unlock the booking calendar and reserve your AI Audit session.
+                  </p>
+                  {paymentError && <p className="text-red-400 text-sm mb-4">{paymentError}</p>}
+                  <button
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="w-full py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 disabled:opacity-50 text-lg"
+                  >
+                    {paymentLoading ? 'Redirecting to payment...' : 'Pay $300 & Book Your Slot'}
+                    {!paymentLoading && <ArrowRight className="w-5 h-5" />}
+                  </button>
+                  <p className="text-[10px] text-zinc-600 mt-4">Secured by Stripe. Money-back guarantee if you don't find value.</p>
+                </div>
+              ) : (
+                <div>
+                  <div className="text-center mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full">
+                      <CheckCircle2 className="w-4 h-4 text-green-400" />
+                      <span className="text-sm font-medium text-green-400">Payment confirmed — select your session time below</span>
+                    </div>
+                  </div>
+                  <div className="glass rounded-[3.5rem] border-white/10 overflow-hidden bg-white/[0.02]">
+                    <div className="p-4 border-b border-white/5 flex items-center justify-between px-8 bg-zinc-900/50">
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-400/20" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-400/20" />
+                        <div className="w-3 h-3 rounded-full bg-green-400/20" />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Lock className="w-3 h-3 text-zinc-600" />
+                        <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">AI Audit • Secure Booking</span>
+                      </div>
+                      <div className="w-12 h-1 bg-white/5 rounded-full" />
+                    </div>
+                    <div className="w-full min-h-[700px] relative bg-zinc-950">
+                      <div id="cal-inline-audit" style={{ width: '100%', height: '900px', overflow: 'scroll' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );
@@ -1331,11 +1411,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
     <div className="pt-40 pb-24 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block">AI Tools Assessment</span>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8">
             Get a Tailored Roadmap to Win Back <span className="text-gradient">5–10 Hours Each Week</span>
@@ -1343,7 +1419,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
           <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
             No Hiring, No Coding, No Need to Become an AI Pro. Just clear, actionable paths designed specifically for your business.
           </p>
-        </motion.div>
+        </div>
 
         {/* Content Tabs/Grid */}
         <div className="grid grid-cols-1 gap-12 mb-24">
@@ -1378,7 +1454,6 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
 
           {/* Final CTA Section */}
           <div className="p-12 md:p-24 glass rounded-[3.5rem] border-white/20 text-center relative overflow-hidden">
-            <div className="mesh-gradient-2 opacity-20" />
             <div className="relative z-10 max-w-2xl mx-auto">
               <h2 className="text-3xl md:text-5xl font-bold mb-10 leading-tight">Ready to Stop Drowning in Admin Work?</h2>
               
@@ -1484,6 +1559,17 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { err
 
 export default function App() {
   const [view, setView] = useState('home');
+  const [hasPaid, setHasPaid] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paid = params.get('paid');
+    if (paid) {
+      setHasPaid(true);
+      setView('book');
+      window.history.replaceState({}, '', '/');
+    }
+  }, []);
 
   const handleNavigate = (newView: string) => {
     setView(newView);
@@ -1493,31 +1579,20 @@ export default function App() {
   return (
     <ErrorBoundary>
     <div className="min-h-screen relative overflow-x-hidden bg-zinc-950">
-      <div className="mesh-gradient-1" />
-      <div className="mesh-gradient-2" />
-      
       <Navbar onNavigate={handleNavigate} currentView={view} />
 
-      <AnimatePresence mode="wait">
-        <motion.div
-           key={view}
-           initial={{ opacity: 0, y: 10 }}
-           animate={{ opacity: 1, y: 0 }}
-           exit={{ opacity: 0, y: -10 }}
-           transition={{ duration: 0.2 }}
-        >
-          {view === 'home' && <Home onNavigate={handleNavigate} />}
-          {view === 'assessment' && <AssessmentPage onNavigate={handleNavigate} />}
-          {view === 'problem' && <ProblemPage onNavigate={handleNavigate} />}
-          {view === 'solution' && <SolutionPage onNavigate={handleNavigate} />}
-          {view === 'results' && <ResultsPage onNavigate={handleNavigate} />}
-          {view === 'quiz' && <QuizPage onNavigate={handleNavigate} />}
-          {view === 'about' && <AboutPage />}
-          {view === 'contact' && <ContactPage />}
-          {view === 'book' && <BookPage />}
-          {view === 'faq' && <FAQPage />}
-        </motion.div>
-      </AnimatePresence>
+      <div>
+        {view === 'home' && <Home onNavigate={handleNavigate} />}
+        {view === 'assessment' && <AssessmentPage onNavigate={handleNavigate} />}
+        {view === 'problem' && <ProblemPage onNavigate={handleNavigate} />}
+        {view === 'solution' && <SolutionPage onNavigate={handleNavigate} />}
+        {view === 'results' && <ResultsPage onNavigate={handleNavigate} />}
+        {view === 'quiz' && <QuizPage onNavigate={handleNavigate} />}
+        {view === 'about' && <AboutPage />}
+        {view === 'contact' && <ContactPage />}
+        {view === 'book' && <BookPage hasPaid={hasPaid} />}
+        {view === 'faq' && <FAQPage />}
+      </div>
 
       {/* Footer */}
       <footer className="py-16 px-6 border-t border-white/5">
