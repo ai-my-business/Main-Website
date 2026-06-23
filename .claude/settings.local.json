@@ -10,7 +10,9 @@
       "Bash(git rm *)",
       "Skill(run)",
       "Bash(node *)",
-      "PowerShell(netlify *)"
+      "PowerShell(netlify *)",
+      "Bash(npx tsc *)",
+      "Bash(grep -v \"className\\\\|//\\\\|badge\\\\|question\\\\|title\\\\|desc\\\\|label\\\\|val\\\\|name\\\\|calLink\\\\|role\\\\|placeholder\\\\|type\\\\|method\\\\|header\\\\|Content\")"
     ]
   }
 }

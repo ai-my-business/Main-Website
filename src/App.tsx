@@ -593,6 +593,14 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
                 ))}
               </ul>
             </div>
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => onNavigate('contact')}
+                className="px-8 py-4 glass text-white font-bold rounded-full hover:bg-white/10 transition-all border border-white/10 flex items-center gap-2"
+              >
+                Contact Us <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -717,7 +725,7 @@ const AboutPage = () => {
         <div className="p-10 md:p-16 glass rounded-[3.5rem] border-white/5 bg-white/[0.01] text-center">
           <h2 className="text-3xl font-bold mb-6">My Promise</h2>
           <p className="text-zinc-400 text-lg mb-8 max-w-2xl mx-auto">
-            "If you give me the chance to work with you, I promise I'll provide actual, measurable results or you'll get your money back. I'm not here to sell you hype. I'm here to provide you real value."
+            "If you give me the chance to work with you, I promise I'll provide actual, measurable results or you'll get your money back. I'm not here to sell you hype. I'm here to provide you <strong className="text-white">real value.</strong>"
           </p>
           <div className="flex flex-col items-center gap-2">
              <span className="text-zinc-600 font-bold uppercase tracking-widest text-[10px]">Owner & Chief Systems Architect</span>
@@ -744,23 +752,11 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                </div>
                <h3 className="text-3xl font-bold text-white">From Engineering Efficiency to Business Scale</h3>
                <p className="text-xl text-zinc-400 leading-relaxed font-light">
-                  When I worked as an **Aerospace Engineer**, I saw first-hand how manual data entry and inefficient communication could ground high-level projects. I spent years perfecting custom AI-driven workflows at a large corporation, eventually creating systems that **saved hundreds of hours of manual labor** every single week.
+                  When I worked as an <strong className="text-white">Aerospace Engineer</strong>, I realised the real benefit automation could bring to a business. I developed a tool for a large company that could save potentially millions of dollars in engineering hours.
                </p>
                <p className="text-xl text-zinc-400 leading-relaxed font-light">
-                  Today, I bring that same engineering mindset to small businesses. Every workflow we design is built for precision, reliability, and maximum time reclamation.
+                  Today, I am inspired to solve other businesses problems and hope to deliver as much value as I can.
                </p>
-               <div className="pt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {[
-                     { label: "Hours Saved Weekly", val: "5-15h" },
-                     { label: "total first year engineering hours saved", val: "$200k" },
-                     { label: "employee adoption", val: "10+" }
-                  ].map((stat, i) => (
-                     <div key={i} className="text-center">
-                        <p className="text-3xl font-bold text-white mb-1">{stat.val}</p>
-                        <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">{stat.label}</p>
-                     </div>
-                  ))}
-               </div>
             </div>
         </div>
 
@@ -783,21 +779,6 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
                   quote: "I was skeptical about AI, but the assessment was worth every penny. The custom roadmap showed me exactly where I was losing time.",
                   author: "Elena R.",
                   role: "E-commerce Founder"
-                },
-                {
-                  quote: "I was expecting 'ChatGPT tips.' But instead I got systems that are practical. I didn't realise how much I didn't know.",
-                  author: "David L.",
-                  role: "Real Estate Professional"
-                },
-                {
-                  quote: "The 'Real Results or Money Back' promise meant I had zero risk. But I wouldn't dream of asking for a refund—the value is clear.",
-                  author: "Jessica M.",
-                  role: "Creative Director"
-                },
-                {
-                  quote: "If you're doing more than $200k/year and still handling your own admin, you need this. It's the best investment I made this year.",
-                  author: "Tom H.",
-                  role: "SaaS Sales Lead"
                 }
               ].map((test, i) => (
                  <div
@@ -1333,9 +1314,9 @@ const BookPage = ({ hasPaid = false }: { hasPaid?: boolean }) => {
         {/* AI Audit Section */}
         <div className="border-t border-white/5 pt-24">
           <div className="text-center mb-20">
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block">AI Tools Assessment</span>
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block">AI Audit</span>
             <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8">
-              Get a Tailored Roadmap to Win Back <span className="text-gradient">5–10 Hours Each Week</span>
+              Know that you definitely want to automate with us? Get a Tailored Roadmap by booking an <span className="text-gradient">Audit Call</span>
             </h2>
             <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
               No Hiring, No Coding, No Need to Become an AI Pro. Just clear, actionable paths designed specifically for your business.
