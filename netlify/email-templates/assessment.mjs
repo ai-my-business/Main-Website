@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// 45 Min AI Assessment — confirmation email sent to the invitee
+// 30 Min AI Audit — confirmation email sent to the invitee
 //
 // CUSTOMISE THIS FILE to change the content for the assessment booking email.
 // All text between the /* EDIT */ markers is safe to change freely.
@@ -27,10 +27,10 @@ export function buildAssessmentEmail(booking) {
   const firstName = booking.name.split(' ')[0];
 
   /* ── EDIT: subject line ── */
-  const subject = `Your 45-Min AI Assessment is Confirmed — ${BRAND.name}`;
+  const subject = `Your 30-Min AI Audit is Confirmed — ${BRAND.name}`;
 
   /* ── EDIT: preview text (shown in inbox before opening) ── */
-  const previewText = `You're booked in, ${firstName}. Here's everything you need for your AI Assessment.`;
+  const previewText = `You're booked in, ${firstName}. Here's everything you need for your AI Audit.`;
 
   const body = `
 
@@ -41,7 +41,7 @@ export function buildAssessmentEmail(booking) {
         You're locked in, ${firstName}.
       </h1>
       <p style="margin:0;color:${BRAND.textSecondary};font-size:15px;line-height:1.7;">
-        Your <strong style="color:${BRAND.textPrimary};">45-Minute AI Assessment</strong> is confirmed.
+        Your <strong style="color:${BRAND.textPrimary};">30-Minute AI Audit</strong> is confirmed.
         We'll spend this session mapping your exact business workflows, identifying where AI can save
         you the most time and money, and building a clear action plan — tailored to you.
       </p>
@@ -53,7 +53,7 @@ export function buildAssessmentEmail(booking) {
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
         ${detailRow('Date', date)}
         ${detailRow('Time', time)}
-        ${detailRow('Duration', '45 minutes')}
+        ${detailRow('Duration', '30 minutes')}
         ${detailRow('Location', location)}
       </table>
     ` })}

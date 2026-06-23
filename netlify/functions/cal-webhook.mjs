@@ -77,8 +77,8 @@ function extractQA(responses) {
 
 function detectEventType(eventName) {
   const lower = eventName.toLowerCase();
-  if (lower.includes('45min') || lower.includes('45-min') || lower.includes('assessment')) return 'assessment';
-  if (lower.includes('15min') || lower.includes('15-min') || lower.includes('discovery'))  return 'discovery';
+  if (lower.includes('audit') || lower.includes('45min') || lower.includes('45-min') || lower.includes('assessment')) return 'assessment';
+  if (lower.includes('30min') || lower.includes('15min') || lower.includes('15-min') || lower.includes('discovery'))  return 'discovery';
   return null;
 }
 

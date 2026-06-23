@@ -112,6 +112,93 @@ function buildActionPlan(answers) {
   };
 }
 
+function buildOwnerNotificationHtml(name, email, answers, plan) {
+  const answersHtml = QUESTIONS.map((q, i) => `
+    <tr>
+      <td style="padding:10px 0;color:#94a3b8;font-size:13px;vertical-align:top;padding-right:16px;border-bottom:1px solid #1e293b;">${q}</td>
+      <td style="padding:10px 0;color:#e2e8f0;font-size:13px;font-weight:600;vertical-align:top;border-bottom:1px solid #1e293b;white-space:nowrap;">${answers[i] || '—'}</td>
+    </tr>`).join('');
+
+  const quickWinsHtml = plan.quickWins.map(w =>
+    `<li style="margin-bottom:8px;color:#cbd5e1;font-size:13px;line-height:1.6;">${w}</li>`
+  ).join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#09090b;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#09090b;padding:40px 20px;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+  <!-- Header -->
+  <tr><td style="padding-bottom:24px;text-align:center;">
+    <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#3b82f6;">AI My Business</p>
+    <h1 style="margin:0;font-size:26px;font-weight:800;color:#ffffff;line-height:1.2;">New Quiz Submission</h1>
+    <p style="margin:10px 0 0;color:#64748b;font-size:14px;">${name} just completed the AI Readiness Quiz</p>
+  </td></tr>
+
+  <!-- Submitter + Score Card -->
+  <tr><td style="padding-bottom:20px;">
+    <table width="100%" cellpadding="24" cellspacing="0" style="background:#0f172a;border:1px solid #334155;border-radius:16px;">
+    <tr><td>
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <p style="margin:0 0 2px;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;">Name</p>
+            <p style="margin:0 0 12px;font-size:16px;font-weight:700;color:#ffffff;">${name}</p>
+            <p style="margin:0 0 2px;font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;">Email</p>
+            <p style="margin:0;font-size:14px;color:#3b82f6;"><a href="mailto:${email}" style="color:#3b82f6;text-decoration:none;">${email}</a></p>
+          </td>
+          <td style="text-align:right;vertical-align:top;">
+            <span style="display:inline-block;padding:4px 12px;background:#1d4ed8;border-radius:99px;font-size:11px;font-weight:700;color:#93c5fd;letter-spacing:0.1em;text-transform:uppercase;">${plan.tierBadge}</span>
+            <div style="margin-top:8px;font-size:28px;font-weight:800;color:#3b82f6;">${plan.score}<span style="font-size:14px;color:#475569;">/${plan.maxScore}</span></div>
+            <div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;">${plan.tierLabel}</div>
+          </td>
+        </tr>
+      </table>
+      <p style="margin:16px 0 0;color:#94a3b8;font-size:13px;line-height:1.6;">${plan.tierIntro}</p>
+      <p style="margin:16px 0 0;">
+        <a href="mailto:${email}" style="display:inline-block;padding:10px 22px;background:#1d4ed8;color:#ffffff;font-weight:700;font-size:13px;text-decoration:none;border-radius:8px;">Reply to ${name.split(' ')[0]}</a>
+      </p>
+    </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Action Plan -->
+  <tr><td style="padding-bottom:20px;">
+    <table width="100%" cellpadding="24" cellspacing="0" style="background:#0f172a;border:1px solid #1e3a5f;border-radius:16px;">
+    <tr><td>
+      <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.15em;">Their Action Plan</p>
+      <h3 style="margin:0 0 4px;font-size:16px;font-weight:700;color:#ffffff;">${plan.painAdvice.title}</h3>
+      <p style="margin:0 0 14px;color:#64748b;font-size:12px;">Quick wins for this tier:</p>
+      <ul style="margin:0;padding-left:20px;">${quickWinsHtml}</ul>
+    </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Quiz Answers -->
+  <tr><td style="padding-bottom:20px;">
+    <table width="100%" cellpadding="24" cellspacing="0" style="background:#0f172a;border:1px solid #1e293b;border-radius:16px;">
+    <tr><td>
+      <h3 style="margin:0 0 16px;font-size:16px;font-weight:700;color:#ffffff;">Their Responses</h3>
+      <table width="100%" cellpadding="0" cellspacing="0">${answersHtml}</table>
+    </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="text-align:center;padding-top:8px;">
+    <p style="margin:0;color:#334155;font-size:12px;">AI My Business · Quiz submission notification</p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+}
+
 function buildHtml(name, answers, plan) {
   const answersHtml = QUESTIONS.map((q, i) => `
     <tr>
@@ -200,7 +287,7 @@ function buildHtml(name, answers, plan) {
     <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:16px;overflow:hidden;">
     <tr><td style="background:#1d4ed8;padding:32px 28px;text-align:center;">
       <h3 style="margin:0 0 8px;font-size:20px;font-weight:800;color:#ffffff;">Want a Full Custom Roadmap?</h3>
-      <p style="margin:0 0 20px;color:#bfdbfe;font-size:14px;line-height:1.7;">Book a free 45-minute AI Assessment and we'll map out exactly what to automate — and in what order — for your specific business.</p>
+      <p style="margin:0 0 20px;color:#bfdbfe;font-size:14px;line-height:1.7;">Book a free 30-minute AI Audit and we'll map out exactly what to automate — and in what order — for your specific business.</p>
       <a href="https://ai-my-business.com.au" style="display:inline-block;padding:14px 32px;background:#ffffff;color:#1d4ed8;font-weight:700;font-size:15px;text-decoration:none;border-radius:99px;">Book My Free Assessment →</a>
     </td></tr>
     </table>
@@ -243,17 +330,29 @@ export const handler = async (event) => {
 
     const plan = buildActionPlan(answers);
     const html = buildHtml(name, answers, plan);
+    const ownerHtml = buildOwnerNotificationHtml(name, email, answers, plan);
 
-    const { error } = await resend.emails.send({
-      from: 'AI My Business <hello@ai-my-business.com.au>',
-      to: email,
-      subject: `Your AI Action Plan — ${plan.tierLabel}`,
-      html,
-    });
+    const [userResult, ownerResult] = await Promise.all([
+      resend.emails.send({
+        from: 'AI My Business <hello@ai-my-business.com.au>',
+        to: email,
+        subject: `Your AI Action Plan — ${plan.tierLabel}`,
+        html,
+      }),
+      resend.emails.send({
+        from: 'AI My Business <hello@ai-my-business.com.au>',
+        to: 'hello@ai-my-business.com.au',
+        subject: `Quiz Lead: ${name} — ${plan.tierLabel} (${plan.score}/${plan.maxScore})`,
+        html: ownerHtml,
+      }),
+    ]);
 
-    if (error) {
-      console.error('Resend error:', error);
+    if (userResult.error) {
+      console.error('Resend error (user):', userResult.error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: 'Failed to send email' }) };
+    }
+    if (ownerResult.error) {
+      console.error('Resend error (owner notification):', ownerResult.error);
     }
 
     return { statusCode: 200, headers, body: JSON.stringify({ success: true, tier: plan.tierLabel }) };

@@ -10,7 +10,7 @@ import {
 } from './_helpers.mjs';
 
 const EVENT_LABELS = {
-  assessment: { label: '45 Min AI Assessment', badgeColor: BRAND.accentColor, badgeBg: '#1e3a5f' },
+  assessment: { label: '30 Min AI Audit', badgeColor: BRAND.accentColor, badgeBg: '#1e3a5f' },
   discovery:  { label: 'Free 15 Min Discovery Call', badgeColor: '#4ade80', badgeBg: '#14532d' },
 };
 
@@ -51,7 +51,7 @@ export function buildOwnerNotification(booking, eventType) {
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
         ${detailRow('Date', date)}
         ${detailRow('Time', time)}
-        ${detailRow('Duration', eventType === 'assessment' ? '45 minutes' : '15 minutes')}
+        ${detailRow('Duration', eventType === 'assessment' ? '30 minutes' : '15 minutes')}
         ${detailRow('Location', location)}
         ${detailRow('Their Timezone', booking.timezone || 'Unknown')}
       </table>
