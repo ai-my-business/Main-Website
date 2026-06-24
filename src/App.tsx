@@ -153,19 +153,13 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
       <div className="relative z-10 max-w-7xl mx-auto text-center">
         <div>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8">
-            Win Back <span className="text-gradient">5–10 Hours</span> a Week,<br className="hidden lg:block" /> Save Time and <span className="text-gradient">Automate</span> Your Business.
+            Ready to Win Back <span className="text-gradient">5–10 Hours</span> a Week?<br className="hidden lg:block" /> Save Time & <span className="text-gradient">Automate</span> Your Business!
           </h1>
           <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto font-light leading-relaxed mb-10">
-            Simple AI systems. No tech skills. No complicated setups. Just clear, practical improvements to your daily workflow.
+            No tech skills. No complicated setups. Just clear, practical improvements to your daily workflow. Find AI opportunities with our free 3-Min Ai Audit Quiz.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <button
-              onClick={() => onNavigate("book")}
-              className="group relative w-full sm:w-auto px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 overflow-hidden shadow-xl shadow-white/5"
-            >
-              <span>Book Now</span>
-            </button>
             <button
               onClick={() => onNavigate("quiz")}
               className="w-full sm:w-auto px-10 py-5 glass text-white font-bold rounded-full hover:bg-white/10 transition-all border border-white/10"
@@ -175,9 +169,9 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-zinc-400 font-medium">
-            <span>✓ Guided Every Step of the Way</span>
-            <span>✓ Money Back Guarantee</span>
-            <span>✓ Results-Focused Solutions</span>
+            <span>✓ Takes 3 mins</span>
+            <span>✓ Completely Free</span>
+            <span>✓ Immediate recommendations</span>
           </div>
         </div>
       </div>
@@ -224,10 +218,7 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
                 </div>
              ))}
           </div>
-          <p className="text-center text-sm text-blue-400/80 font-medium tracking-wide mt-10">
-            Value Guarantee — If you don't find the audit valuable, we'll refund you.
-          </p>
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-10">
             <button
               onClick={() => onNavigate('book')}
               className="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center gap-2"
@@ -235,7 +226,21 @@ const Home = ({ onNavigate }: { onNavigate: (view: string) => void }) => (
               Book Now <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-zinc-400 font-medium mt-6">
+            <span>✓ Guided Every Step of the Way</span>
+            <span>✓ Money Back Guarantee</span>
+            <span>✓ Results-Focused Solutions</span>
+          </div>
        </div>
+    </section>
+
+    {/* Quote */}
+    <section className="py-12 px-6">
+      <div className="max-w-3xl mx-auto text-center">
+        <p className="text-xl md:text-2xl text-zinc-400 italic font-light leading-relaxed">
+          "The gap between early AI adopters and the rest is widening every week."
+        </p>
+      </div>
     </section>
 
     {/* Support CTA */}
@@ -294,14 +299,14 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
   return (
     <div className="pt-40 pb-32 px-6">
       <div className="max-w-5xl mx-auto">
-        <SectionHeading badge="The Reality" align="left">Stuck in AI Limbo</SectionHeading>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
-           <div className="lg:col-span-8 space-y-12">
+        <SectionHeading badge="The Reality" align="left">Still Not Using AI in Your Business?</SectionHeading>
+
+        <div className="mb-24">
+           <div className="space-y-12">
               <div className="space-y-6">
-                 <h3 className="text-3xl font-bold text-white leading-tight">You can see how powerful AI is—but you haven't put it to work in your business yet.</h3>
+                 <h3 className="text-3xl font-bold text-white leading-tight">While others are saving time and cutting costs, most businesses are still stuck figuring out where to start.</h3>
                  <p className="text-xl text-zinc-400 leading-relaxed font-light">
-                    lets help you see the power.
+                    We'll show you exactly where AI can deliver results.
                  </p>
               </div>
 
@@ -442,28 +447,6 @@ const ProblemPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
               </div>
            </div>
 
-           <div className="lg:col-span-4 lg:block hidden">
-              <div className="sticky top-32 space-y-6">
-                 <div className="p-8 glass rounded-[2.5rem] border-white/10 bg-white/[0.01]">
-                    <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400 mb-8">The Compound Cost</h4>
-                    <div className="space-y-8">
-                       {[
-                         { label: "Lost Weekly", val: "10 Hours" },
-                         { label: "Lost Yearly", val: "520 Hours" },
-                         { label: "Mental Drain", val: "High" }
-                       ].map((item, i) => (
-                          <div key={i} className="space-y-2">
-                             <p className="text-[10px] uppercase font-bold text-zinc-600">{item.label}</p>
-                             <p className="text-2xl font-bold text-white">{item.val}</p>
-                          </div>
-                       ))}
-                    </div>
-                 </div>
-                 <div className="p-8 glass rounded-[2.5rem] border-white/5 text-center">
-                    <p className="text-zinc-500 text-sm italic">"The gap between early adopters and the rest is widening every week."</p>
-                 </div>
-              </div>
-           </div>
         </div>
       </div>
     </div>
@@ -568,25 +551,46 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
         {/* Is This Right for You? */}
         <div className="mt-32 space-y-8">
           <SectionHeading badge="Compatibility">Is This Right for You?</SectionHeading>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto space-y-6">
             <div className="p-10 glass border-green-500/10 rounded-[2.5rem] bg-green-500/[0.01]">
               <h3 className="text-xl font-bold mb-8 text-green-400 uppercase tracking-widest flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5" />
-                This IS for you if…
+                This is for you if…
               </h3>
               <ul className="space-y-4 text-zinc-200">
                 {[
-                  "You're earning $150K–$500K/year and overwhelmed with admin tasks and low value work",
-                  "You've used ChatGPT but aren't sure how to weave AI into your daily workflows. Things still feel manual.",
-                  "You keep saving tools but never actually implement them",
-                  "You want a clear starting point—not another course that overloads you",
-                  "You're ready to put in a few hours THIS WEEK to save countless hours later",
-                  "You care about actual results instead of tech",
-                  "Information is scattered across many places and spending lots of time on repetitive /low value tasks"
+                  "You're run off your feet with admin and low-value work, and it's crowding out the things that actually grow the business",
+                  "You've tried ChatGPT, but it still feels manual and you can't see how AI fits your actual day",
+                  "You've got a folder of tools you saved and never set up",
+                  "Your information lives in ten different places and nothing talks to each other",
+                  "You want a clear first step, not another course you'll half-finish",
+                  "You'll put a few hours in this week to save days every month after",
+                  "You care about the result, not the technology"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <div className="w-5 h-5 shrink-0 mt-1 rounded-full bg-green-400/10 flex items-center justify-center">
                       <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
+                    </div>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-10 glass border-red-500/10 rounded-[2.5rem] bg-red-500/[0.01]">
+              <h3 className="text-xl font-bold mb-8 text-red-400 uppercase tracking-widest flex items-center gap-2">
+                <XCircle className="w-5 h-5" />
+                This probably isn't for you if…
+              </h3>
+              <ul className="space-y-4 text-zinc-200">
+                {[
+                  "You want to learn it all yourself rather than have it built and working",
+                  "You're not willing to change how a handful of tasks get done",
+                  "You're after the cheapest tool, not the outcome",
+                  "You're just starting out and don't have real processes to streamline yet"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <div className="w-5 h-5 shrink-0 mt-1 rounded-full bg-red-400/10 flex items-center justify-center">
+                      <XCircle className="w-3.5 h-3.5 text-red-400" />
                     </div>
                     <span>{item}</span>
                   </li>
@@ -601,6 +605,106 @@ const SolutionPage = ({ onNavigate }: { onNavigate: (view: string) => void }) =>
                 Contact Us <ArrowRight className="w-4 h-4" />
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Key Insights */}
+        <div className="mt-32 space-y-16">
+          <SectionHeading badge="Key Insights">AI for your business, without the hype</SectionHeading>
+
+          <p className="text-lg text-zinc-400 leading-relaxed max-w-3xl mx-auto text-center -mt-8">
+            Software that takes the repetitive reading, sorting, drafting and following-up off your plate — so you can get back to the work only you can do. No robots. No jargon. Just hours back in your week.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Clock,
+                title: "Stop being the bottleneck",
+                body: "In most small businesses, everything waits for the owner. Quotes, replies, the follow-up you meant to make on Tuesday. AI takes the first pass so things stop sitting for three days. You still decide — you just stop being the hold-up."
+              },
+              {
+                icon: Zap,
+                title: "Win the jobs you're currently losing",
+                body: "A customer who emails at 10am and hears back at 6pm has usually already called someone else. AI sends a useful first reply the moment an enquiry lands, then keeps nudging until you can take over."
+              },
+              {
+                icon: BarChart3,
+                title: "Get your week back from admin",
+                body: "Reading invoices, copying details between systems, answering the same questions. None of it grows the business — all of it has to happen. One firm cut invoice processing from 40 hours a month to about six. That's the work AI is built for."
+              },
+              {
+                icon: Users,
+                title: "Cover jobs you can't justify hiring for",
+                body: "You don't need a full wage to answer FAQs or book appointments. AI handles 40–60% of everyday customer questions on its own and passes you only the ones that need a human."
+              },
+              {
+                icon: TrendingUp,
+                title: "Never drop a follow-up again",
+                body: "Most lost sales aren't a no — they're a never-got-back-to-them. AI doesn't get distracted. It keeps every lead and overdue invoice moving without you holding it all in your head."
+              },
+              {
+                icon: ShieldCheck,
+                title: "The opportunity is using it well",
+                body: "Two-thirds of Australian small businesses already use AI, but only 5% are set up to get the full benefit. The gap isn't whether to use it — it's using it well."
+              }
+            ].map((item, i) => (
+              <div key={i} className="p-8 glass rounded-[2.5rem] border-white/5 flex flex-col gap-5 hover:bg-white/[0.03] transition-all group">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:scale-110 transition-transform shrink-0">
+                  <item.icon className="w-6 h-6 text-blue-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-zinc-500 leading-relaxed">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Honest Answers */}
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-xl font-bold text-white mb-8 text-center">A few honest answers</h3>
+            <div className="space-y-4">
+              {[
+                {
+                  q: "Will it replace my team?",
+                  a: "The opposite, usually. It removes the tasks nobody enjoys and frees your people for the work that needs a human."
+                },
+                {
+                  q: "Is it expensive?",
+                  a: "Entry tools cost less than a phone plan. The real barrier is knowing where to start — which is exactly what we solve."
+                },
+                {
+                  q: "Is it for a business like mine?",
+                  a: "Two-thirds of Australian small businesses already use AI, but only 5% are set up to get the full benefit. The opportunity isn't whether to use it. It's using it well."
+                }
+              ].map((item, i) => (
+                <div key={i} className="p-6 glass rounded-2xl border-white/5 flex gap-6">
+                  <div className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0 mt-0.5 border border-blue-500/20">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-sm mb-1">{item.q}</p>
+                    <p className="text-sm text-zinc-500 leading-relaxed">{item.a}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Where we come in */}
+          <div className="max-w-3xl mx-auto p-10 glass rounded-[2.5rem] border-blue-500/10 bg-blue-500/[0.01] text-center">
+            <Lightbulb className="w-8 h-8 text-blue-400 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-white mb-4">Where we come in</h3>
+            <p className="text-zinc-400 leading-relaxed">
+              We start with the one task costing you the most time, automate it properly, and prove the hours it gives back before moving to the next. No overhaul, no disruption — just one win at a time.
+            </p>
+            <button
+              onClick={() => onNavigate('book')}
+              className="mt-8 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all inline-flex items-center gap-2"
+            >
+              Book Now <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>
@@ -803,10 +907,40 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
            </div>
         </div>
 
+        {/* Why Work With Us */}
+        <div className="mt-32 space-y-8">
+          <SectionHeading badge="Why Us" align="center">Why Work With Us</SectionHeading>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              {
+                title: "One person, start to finish.",
+                body: "The person who plans your automation builds it. No agency handoff, no juniors on your project, no being passed around."
+              },
+              {
+                title: "One win first, not a big overhaul.",
+                body: "We automate the task costing you the most time and show you the hours it gives back before touching anything else. Low risk, fast payback."
+              },
+              {
+                title: "Built around your business.",
+                body: "Your automations fit how you actually work, not a generic template you have to bend yourself around."
+              },
+              {
+                title: "A real engineering technical background.",
+                body: "We build automations that fix the right problem and keep working after go-live, not generic advice you're left to implement alone."
+              }
+            ].map((item, i) => (
+              <div key={i} className="p-8 glass rounded-[2.5rem] border-white/5 flex flex-col gap-3">
+                <p className="font-bold text-white text-lg">{item.title}</p>
+                <p className="text-zinc-400 leading-relaxed text-sm">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Final CTA */}
-        <div className="mt-32 text-center">
+        <div className="mt-24 text-center">
            <h2 className="text-3xl font-bold mb-8">Want Results Like These?</h2>
-           <button 
+           <button
              onClick={() => onNavigate('book')}
              className="px-10 py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all shadow-xl shadow-blue-500/10"
            >
@@ -818,104 +952,303 @@ const ResultsPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => 
   );
 };
 
+interface ChoiceQuizQuestion {
+  id: string; kind: 'choice'; question: string;
+  options: { label: string; points: number }[];
+  scoreGroup: 'opportunity' | 'readiness' | 'none';
+}
+interface TextQuizQuestion {
+  id: string; kind: 'text'; question: string; placeholder: string;
+}
+interface MultiSelectQuizQuestion {
+  id: string; kind: 'multiselect'; question: string; options: string[]; allowOther: boolean;
+}
+type QuizQuestion = ChoiceQuizQuestion | TextQuizQuestion | MultiSelectQuizQuestion;
+
 const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [multiSelectAnswer, setMultiSelectAnswer] = useState<string[]>([]);
+  const [otherText, setOtherText] = useState('');
+  const [textInput, setTextInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [contactInfo, setContactInfo] = useState({ name: '', email: '' });
   const [actionPlan, setActionPlan] = useState('');
   const [emailSent, setEmailSent] = useState(false);
+  const [scores, setScores] = useState({ opportunity: 0, readiness: 0 });
 
   useEffect(() => { window.scrollTo(0, 0); }, [step, showResults]);
 
-  const questions = [
+  const questions: QuizQuestion[] = [
+    // --- Opportunity questions ---
     {
-      id: 1,
-      question: "How much time does your team spend each week on repetitive administrative tasks?",
-      options: ["0–2 hours", "3–5 hours", "6–10 hours", "10+ hours"]
+      id: 'admin_time', kind: 'choice', scoreGroup: 'opportunity',
+      question: "Roughly how many hours a week does your team lose to repetitive admin?",
+      options: [
+        { label: "Under 5", points: 1 },
+        { label: "5–10", points: 2 },
+        { label: "10–20", points: 3 },
+        { label: "20+", points: 4 },
+        { label: "Not sure", points: 2 },
+      ]
     },
     {
-      id: 2,
-      question: "How often do you or your team manually respond to similar customer or client questions?",
-      options: ["Rarely", "Occasionally", "Frequently", "Daily / Constantly"]
+      id: 'repeat_questions', kind: 'choice', scoreGroup: 'opportunity',
+      question: "How often does your team answer the same customer questions by hand?",
+      options: [
+        { label: "Rarely", points: 1 },
+        { label: "A few times a week", points: 2 },
+        { label: "Daily", points: 3 },
+        { label: "Constantly", points: 4 },
+      ]
     },
     {
-      id: 3,
-      question: "How are most of your internal processes currently handled?",
-      options: ["Fully manual (no automation)", "A mix of manual + basic tools", "Some automation tools in place", "Mostly automated already"]
+      id: 'internal_processes', kind: 'choice', scoreGroup: 'opportunity',
+      question: "How are your internal processes mostly handled?",
+      options: [
+        { label: "Mostly in people's heads or on paper", points: 4 },
+        { label: "Spreadsheets and email", points: 3 },
+        { label: "Several tools that don't talk to each other", points: 2 },
+        { label: "Connected systems, little automation", points: 1 },
+        { label: "Largely automated already", points: 0 },
+      ]
     },
     {
-      id: 4,
-      question: "How much time is spent each week on data entry, updating systems, or transferring information between tools?",
-      options: ["Very little", "A few hours", "Several hours", "A significant portion of the week"]
+      id: 'moving_info', kind: 'choice', scoreGroup: 'opportunity',
+      question: "How often does someone manually move information from one tool to another?",
+      options: [
+        { label: "Rarely", points: 1 },
+        { label: "Weekly", points: 2 },
+        { label: "Daily", points: 3 },
+        { label: "Constantly", points: 4 },
+      ]
     },
     {
-      id: 5,
-      question: "How often do delays or bottlenecks occur due to manual work or human dependency?",
-      options: ["Rarely", "Sometimes", "Often", "Very frequently"]
+      id: 'bottlenecks', kind: 'choice', scoreGroup: 'opportunity',
+      question: "How often do things stall waiting on one person or a manual step?",
+      options: [
+        { label: "Rarely", points: 1 },
+        { label: "Occasionally", points: 2 },
+        { label: "Weekly", points: 3 },
+        { label: "Constant problem", points: 4 },
+      ]
     },
+    // --- Motivation (unscored) ---
     {
-      id: 6,
-      question: "What's the number 1 problem/challenge facing you right now?",
-      options: ["money", "time", "quality"]
-    },
-    {
-      id: 7,
+      id: 'motivation', kind: 'choice', scoreGroup: 'none',
       question: "If you could remove 20–40% of manual workload in your business, what would that mean for you?",
-      options: ["Minimal impact", "Helpful but not critical", "Significant time and cost savings", "Game-changing growth opportunity"]
-    }
+      options: [
+        { label: "Minimal impact", points: 0 },
+        { label: "Helpful but not critical", points: 0 },
+        { label: "Significant time and cost savings", points: 0 },
+        { label: "Game-changing growth opportunity", points: 0 },
+      ]
+    },
+    // --- Readiness questions ---
+    {
+      id: 'ai_use', kind: 'choice', scoreGroup: 'readiness',
+      question: "Are you using any AI tools in the business today?",
+      options: [
+        { label: "No", points: 0 },
+        { label: "Tried it informally", points: 1 },
+        { label: "A few people use it ad hoc", points: 2 },
+        { label: "Built into one or two workflows", points: 3 },
+        { label: "Embedded across several areas", points: 4 },
+      ]
+    },
+    {
+      id: 'data_foundation', kind: 'choice', scoreGroup: 'readiness',
+      question: "Where does your business information live?",
+      options: [
+        { label: "Scattered across people, paper and inboxes", points: 0 },
+        { label: "Mostly spreadsheets", points: 1 },
+        { label: "A few systems that don't connect", points: 2 },
+        { label: "Mostly centralised and tidy", points: 3 },
+      ]
+    },
+    {
+      id: 'strategy', kind: 'choice', scoreGroup: 'readiness',
+      question: "Do you have a plan for how AI fits your business?",
+      options: [
+        { label: "Haven't thought about it", points: 0 },
+        { label: "Curious, no plan", points: 1 },
+        { label: "Rough idea", points: 2 },
+        { label: "Clear plan we're working to", points: 3 },
+      ]
+    },
+    {
+      id: 'measurement', kind: 'choice', scoreGroup: 'readiness',
+      question: "Do you know the time or cost of your main repeat tasks?",
+      options: [
+        { label: "No", points: 0 },
+        { label: "Roughly, in my head", points: 1 },
+        { label: "Some of it", points: 2 },
+        { label: "Yes, we track it", points: 3 },
+      ]
+    },
+    {
+      id: 'governance', kind: 'choice', scoreGroup: 'readiness',
+      question: "Do you have any rules for how your team uses AI?",
+      options: [
+        { label: "No", points: 0 },
+        { label: "Haven't needed to", points: 1 },
+        { label: "Informal understanding", points: 2 },
+        { label: "Written guidelines", points: 3 },
+      ]
+    },
+    // --- Open questions ---
+    {
+      id: 'situation', kind: 'text',
+      question: "What best describes your current business situation?",
+      placeholder: "e.g. Solo consultant juggling too many clients, small team spending hours on manual admin..."
+    },
+    {
+      id: 'outcome', kind: 'text',
+      question: "What outcome would you like to achieve in the next 90 days?",
+      placeholder: "e.g. Halve the time I spend on follow-ups, build a system for onboarding new clients..."
+    },
+    {
+      id: 'obstacle', kind: 'text',
+      question: "What's stopping you — or what have you tried that hasn't worked?",
+      placeholder: "e.g. Started with Zapier but couldn't connect it to our CRM, tried ChatGPT but don't have a system..."
+    },
+    {
+      id: 'solution', kind: 'multiselect', allowOther: true,
+      question: "Which solution do you think would suit you best?",
+      options: [
+        "Process Redesign",
+        "Automations & Integrations",
+        "AI Training & Strategy",
+        "Knowledge System / Custom GPT",
+        "Custom Workflow Build",
+        "Ongoing Support & Maintenance",
+      ]
+    },
+    {
+      id: 'anything_else', kind: 'text',
+      question: "Is there anything else we should know about your business?",
+      placeholder: "Optional — any context that helps us prepare for our conversation."
+    },
   ];
 
-  const handleAnswer = (option: string) => {
-    const newAnswers = [...answers, option];
-    setAnswers(newAnswers);
-    if (step < questions.length - 1) {
-      setStep(step + 1);
-    } else {
-      setStep(questions.length); // Final step for contact info
+  const computeScores = () => {
+    let opportunity = 0, opportunityMax = 0;
+    let readiness = 0, readinessMax = 0;
+    for (const q of questions) {
+      if (q.kind !== 'choice') continue;
+      const max = Math.max(...q.options.map(o => o.points));
+      const selected = q.options.find(o => o.label === answers[q.id]);
+      if (q.scoreGroup === 'opportunity') {
+        opportunityMax += max;
+        if (selected) opportunity += selected.points;
+      } else if (q.scoreGroup === 'readiness') {
+        readinessMax += max;
+        if (selected) readiness += selected.points;
+      }
     }
+    return {
+      opportunity: opportunityMax > 0 ? Math.round((opportunity / opportunityMax) * 100) : 0,
+      readiness: readinessMax > 0 ? Math.round((readiness / readinessMax) * 100) : 0,
+    };
   };
+
+  const getResultProfile = (opp: number, ready: number) => {
+    if (opp >= 60 && ready < 50) return {
+      label: "High potential, not yet set up",
+      copy: "You have significant manual work that AI can remove — and you're not yet set up to get there alone. This is exactly who we help most. One focused engagement could recover hours every week.",
+      highlight: true,
+    };
+    if (opp >= 60 && ready >= 50) return {
+      label: "Ready to scale fast",
+      copy: "You have both the need and the foundations. The right systems could have a measurable impact within weeks.",
+      highlight: false,
+    };
+    if (opp < 60 && ready >= 50) return {
+      label: "Good foundations, lower urgency",
+      copy: "Your operations are relatively lean and you've started building AI habits. The opportunity is there, but the wins will be more incremental than transformational right now.",
+      highlight: false,
+    };
+    return {
+      label: "Early stage",
+      copy: "Starting with one small automation will build the confidence and habits that compound over time. The groundwork you lay now pays off fast.",
+      highlight: false,
+    };
+  };
+
+  const advance = () => {
+    if (step < questions.length - 1) setStep(s => s + 1);
+    else setStep(questions.length);
+  };
+
+  const handleChoiceAnswer = (label: string) => {
+    setAnswers(prev => ({ ...prev, [questions[step].id]: label }));
+    advance();
+  };
+
+  const handleTextNext = () => {
+    setAnswers(prev => ({ ...prev, [questions[step].id]: textInput }));
+    setTextInput('');
+    advance();
+  };
+
+  const handleMultiSelectNext = () => {
+    const combined = otherText ? [...multiSelectAnswer, `Other: ${otherText}`] : multiSelectAnswer;
+    setAnswers(prev => ({ ...prev, [questions[step].id]: combined.join(', ') }));
+    setMultiSelectAnswer([]);
+    setOtherText('');
+    advance();
+  };
+
+  const toggleMultiSelect = (option: string) => {
+    setMultiSelectAnswer(prev =>
+      prev.includes(option) ? prev.filter(o => o !== option) : [...prev, option]
+    );
+  };
+
+  const fallbackPlan = "Start by mapping your highest-volume manual task end-to-end. Identify which steps are repetitive and predictable — those are your first automation targets. Most businesses find a meaningful quick win within the first workflow they map out.";
 
   const generateActionPlan = async () => {
     setIsSubmitting(true);
+    const computed = computeScores();
+    setScores(computed);
 
-    // Fire email in background — doesn't block the UI
     fetch('/.netlify/functions/send-quiz-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: contactInfo.name, email: contactInfo.email, answers }),
-    })
-      .then(r => { if (r.ok) setEmailSent(true); })
-      .catch(() => {});
+      body: JSON.stringify({
+        name: contactInfo.name,
+        email: contactInfo.email,
+        answers: Object.entries(answers).map(([id, val]) => `${id}: ${val}`),
+        opportunityScore: computed.opportunity,
+        readinessScore: computed.readiness,
+      }),
+    }).then(r => { if (r.ok) setEmailSent(true); }).catch(() => {});
 
     try {
       const { GoogleGenAI } = await import("@google/genai");
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-      
-      const prompt = `
-        You are an AI Systems Architect. A business owner just took an AI Audit Quiz. 
-        Here are their answers:
-        ${questions.map((q, i) => `${q.question}: ${answers[i]}`).join('\n')}
-        
-        Based on these answers, generate a "Quick Action Plan" for their business.
-        Format it in clear, punchy bullet points. 
-        Focus on identifying "Low Hanging Fruit" (immediate wins) and "Long Term System Gains" (scalable infrastructure).
-        Keep it under 250 words and extremely practical.
-        Address them as a professional AI systems architect.
-      `;
+
+      const qaSummary = questions.map(q => `${q.question}: ${answers[q.id] || '(skipped)'}`).join('\n');
+      const prompt = `You are an AI Systems Architect. A small business owner completed an AI readiness audit.
+
+Scores:
+- Automation Opportunity: ${computed.opportunity}% (higher = more manual work that could be automated)
+- AI Readiness: ${computed.readiness}% (higher = better set up to adopt AI today)
+
+Their answers:
+${qaSummary}
+
+Write a "Quick Action Plan" tailored to their situation. Lead with 2–3 immediate wins (actionable this week), then 2–3 medium-term system gains. Reference their specific answers where relevant. If opportunity is high and readiness is low, focus on foundation-first steps. Under 250 words. Plain language, no jargon.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-2.0-flash",
         contents: prompt
       });
-      
-      setActionPlan(response.text || "Focus on automating your repetitive admin tasks first. Start by documenting your most common manual workflows and identify where lead follow-ups can be streamlined using tools like ChatGPT and Zapier.");
+      setActionPlan(response.text || fallbackPlan);
       setShowResults(true);
-    } catch (error) {
-      console.error("Error generating action plan:", error);
-      // Fallback action plan if API fails
-      setActionPlan("Focus on automating your repetitive admin tasks first. Start by documenting your most common manual workflows and identify where lead follow-ups can be streamlined using tools like ChatGPT and Zapier.");
+    } catch {
+      setActionPlan(fallbackPlan);
       setShowResults(true);
     } finally {
       setIsSubmitting(false);
@@ -928,15 +1261,41 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
   };
 
   if (showResults) {
+    const profile = getResultProfile(scores.opportunity, scores.readiness);
     return (
       <div className="pt-40 pb-32 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="glass rounded-[3.5rem] p-10 md:p-20 border-white/10">
-            <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-4 mb-10">
               <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center border border-green-500/20">
                 <CheckCircle2 className="w-6 h-6 text-green-400" />
               </div>
               <h2 className="text-3xl font-bold text-white">Your AI Readiness Report</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-500 mb-3">Automation Opportunity</p>
+                <span className="text-5xl font-bold text-white block mb-4">{scores.opportunity}%</span>
+                <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-blue-500 rounded-full" style={{ width: `${scores.opportunity}%` }} />
+                </div>
+                <p className="text-xs text-zinc-500 mt-3">How much manual work could be automated</p>
+              </div>
+              <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-500 mb-3">AI Readiness</p>
+                <span className="text-5xl font-bold text-white block mb-4">{scores.readiness}%</span>
+                <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-indigo-400 rounded-full" style={{ width: `${scores.readiness}%` }} />
+                </div>
+                <p className="text-xs text-zinc-500 mt-3">How set up you are to adopt AI now</p>
+              </div>
+            </div>
+
+            <div className={`p-8 rounded-3xl mb-10 ${profile.highlight ? 'bg-blue-500/10 border border-blue-500/20' : 'bg-white/[0.02] border border-white/10'}`}>
+              <p className={`text-[10px] font-bold uppercase tracking-[0.25em] mb-2 ${profile.highlight ? 'text-blue-400' : 'text-zinc-500'}`}>Your Profile</p>
+              <h3 className="text-xl font-bold text-white mb-3">{profile.label}</h3>
+              <p className="text-zinc-400 leading-relaxed">{profile.copy}</p>
             </div>
 
             <div className="space-y-12">
@@ -945,9 +1304,9 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                   <Lightbulb className="w-5 h-5" /> Quick Action Plan
                 </h3>
                 <div className="text-zinc-300 leading-relaxed space-y-4 prose prose-invert max-w-none">
-                   {actionPlan.split('\n').map((line, i) => (
-                     <p key={i}>{line}</p>
-                   ))}
+                  {actionPlan.split('\n').map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
                 </div>
               </div>
 
@@ -958,15 +1317,15 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                     <p className="font-bold text-white mb-2">Check Your Email</p>
                     <p className="text-sm text-zinc-500">
                       {emailSent
-                        ? `A copy of this plan has been sent to ${contactInfo.email}.`
-                        : `Your action plan is being sent to ${contactInfo.email} — check your inbox shortly.`}
+                        ? `A copy of this report has been sent to ${contactInfo.email}.`
+                        : `Your report is being sent to ${contactInfo.email} — check your inbox shortly.`}
                     </p>
                   </div>
                   <div className="p-6 glass rounded-2xl border-blue-500/20 bg-blue-500/5">
-                    <p className="font-bold text-white mb-2">Want a Deep Dive?</p>
-                    <p className="text-sm text-zinc-500 mb-4">Book a 30-min audit to build a full custom roadmap.</p>
-                    <button 
-                      onClick={() => onNavigate('assessment')}
+                    <p className="font-bold text-white mb-2">Want a Full Custom Roadmap?</p>
+                    <p className="text-sm text-zinc-500 mb-4">Book a free 30-minute Discovery Call and we'll map out exactly what to automate — and in what order — for your specific business.</p>
+                    <button
+                      onClick={() => onNavigate('book')}
                       className="text-sm font-bold text-blue-400 flex items-center gap-2"
                     >
                       Book Now <ArrowRight className="w-4 h-4" />
@@ -980,6 +1339,8 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
       </div>
     );
   }
+
+  const currentQuestion = step < questions.length ? questions[step] : null;
 
   return (
     <div className="pt-40 pb-32 px-6">
@@ -998,34 +1359,95 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
         </div>
 
         <div>
-          {step < questions.length ? (
+          {currentQuestion ? (
             <div className="space-y-10">
               <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-                {questions[step].question}
+                {currentQuestion.question}
               </h2>
-              <div className="grid grid-cols-1 gap-4">
-                {questions[step].options.map((option, i) => (
+
+              {currentQuestion.kind === 'choice' && (
+                <div className="grid grid-cols-1 gap-4">
+                  {currentQuestion.options.map((option, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handleChoiceAnswer(option.label)}
+                      className="w-full p-6 text-left glass rounded-2xl border-white/5 hover:border-blue-500/50 hover:bg-white/[0.03] transition-all group flex items-center justify-between"
+                    >
+                      <span className="text-lg text-zinc-300 group-hover:text-white transition-colors">{option.label}</span>
+                      <ArrowRight className="w-5 h-5 text-zinc-600 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {currentQuestion.kind === 'text' && (
+                <div className="space-y-4">
+                  <textarea
+                    rows={4}
+                    value={textInput}
+                    onChange={(e) => setTextInput(e.target.value)}
+                    placeholder={currentQuestion.placeholder}
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
+                  />
                   <button
-                    key={i}
-                    onClick={() => handleAnswer(option)}
-                    className="w-full p-6 text-left glass rounded-2xl border-white/5 hover:border-blue-500/50 hover:bg-white/[0.03] transition-all group flex items-center justify-between"
+                    onClick={handleTextNext}
+                    className="w-full py-4 bg-white text-black font-bold rounded-2xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-2"
                   >
-                    <span className="text-lg text-zinc-300 group-hover:text-white transition-colors">{option}</span>
-                    <ArrowRight className="w-5 h-5 text-zinc-600 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                    {textInput ? 'Continue' : 'Skip'} <ArrowRight className="w-4 h-4" />
                   </button>
-                ))}
-              </div>
+                </div>
+              )}
+
+              {currentQuestion.kind === 'multiselect' && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 gap-3">
+                    {currentQuestion.options.map((option, i) => {
+                      const selected = multiSelectAnswer.includes(option);
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => toggleMultiSelect(option)}
+                          className={`w-full p-5 text-left rounded-2xl border transition-all flex items-center gap-4 ${selected ? 'bg-blue-500/10 border-blue-500/40 text-white' : 'glass border-white/5 text-zinc-400 hover:border-white/20 hover:text-white'}`}
+                        >
+                          <div className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center transition-all ${selected ? 'bg-blue-500 border-blue-500' : 'border-zinc-600'}`}>
+                            {selected && <div className="w-2 h-2 bg-white rounded-sm" />}
+                          </div>
+                          <span className="text-base">{option}</span>
+                        </button>
+                      );
+                    })}
+                    {currentQuestion.allowOther && (
+                      <div className="p-5 glass rounded-2xl border border-white/5">
+                        <p className="text-sm text-zinc-500 mb-2 font-medium">Other</p>
+                        <input
+                          type="text"
+                          value={otherText}
+                          onChange={(e) => setOtherText(e.target.value)}
+                          placeholder="Describe what you're looking for..."
+                          className="w-full bg-transparent text-white text-sm focus:outline-none placeholder-zinc-600"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={handleMultiSelectNext}
+                    className="w-full py-4 bg-white text-black font-bold rounded-2xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-2"
+                  >
+                    {(multiSelectAnswer.length > 0 || otherText) ? 'Continue' : 'Skip'} <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="glass p-10 md:p-16 rounded-[3rem] border-white/10">
               <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold text-white mb-4">Almost Done!</h2>
-                <p className="text-zinc-400">Where should we send your quick action plan?</p>
+                <p className="text-zinc-400">Where should we send your report?</p>
               </div>
               <form onSubmit={handleContactSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-2">First Name</label>
-                  <input 
+                  <input
                     required
                     type="text"
                     value={contactInfo.name}
@@ -1036,7 +1458,7 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest pl-2">Email Address</label>
-                  <input 
+                  <input
                     required
                     type="email"
                     value={contactInfo.email}
@@ -1045,15 +1467,15 @@ const QuizPage = ({ onNavigate }: { onNavigate: (view: string) => void }) => {
                     placeholder="Enter your email"
                   />
                 </div>
-                <button 
+                <button
                   disabled={isSubmitting}
                   type="submit"
                   className="w-full py-5 bg-white text-black font-bold rounded-2xl hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Generating Your Plan...' : 'Get My Action Plan'} <ArrowRight className="w-5 h-5" />
+                  {isSubmitting ? 'Generating Your Report...' : 'Get My Report'} <ArrowRight className="w-5 h-5" />
                 </button>
                 <p className="text-center text-[10px] text-zinc-600">
-                  By clicking, you agree to receive a one-time AI action plan and occasional system updates.
+                  By clicking, you agree to receive a one-time AI readiness report and occasional updates.
                 </p>
               </form>
             </div>
@@ -1328,7 +1750,6 @@ const BookPage = ({ hasPaid = false }: { hasPaid?: boolean }) => {
             {/* How It Works */}
             <div className="p-10 glass rounded-[2.5rem] bg-white/[0.02] border-white/10">
               <div className="text-center mb-10">
-                <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-500/50 mb-3 block">How It Works</span>
                 <div className="flex items-center justify-center gap-4 text-white">
                   <Sparkles className="w-6 h-6 text-blue-400" />
                   <h3 className="text-2xl font-bold uppercase tracking-widest">How It Works</h3>
@@ -1369,12 +1790,17 @@ const BookPage = ({ hasPaid = false }: { hasPaid?: boolean }) => {
                       <div className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0 mt-1">
                         <CheckCircle2 className="w-4 h-4 text-blue-400" />
                       </div>
-                      <p className="text-sm text-zinc-200">Or invest 30 minutes with us and walk away with a clear, actionable plan to take back your time.</p>
+                      <p className="text-sm text-zinc-200">Or invest a couple of hours with us and walk away with a clear, actionable plan to take back your time.</p>
                     </div>
                   </div>
-                  <p className="text-lg text-zinc-400 pt-4">
-                    The assessment is <span className="text-white font-bold">$300</span>. If this assessment helps you save just a couple hours per week, it pays for itself within the first week. Most clients uncover <span className="text-white font-bold">at least 5–10 hours</span> of weekly time savings.
-                  </p>
+                  <div className="space-y-4 pt-4">
+                    <p className="text-lg text-zinc-400">
+                      The Audit Call is <span className="text-white font-bold">$300</span>. If this Audit Call helps you save just a couple hours per week, it pays for itself within the first week. Most clients uncover <span className="text-white font-bold">at least 5–10 hours</span> of weekly time savings. If you decide to work with us for implementation we will deduct the cost of the Audit off the price.
+                    </p>
+                    <p className="text-base text-zinc-400">
+                      <span className="text-white font-bold">✓</span> Value Guarantee — if you don't find the Audit Call valuable, you can have your money back.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1390,7 +1816,7 @@ const BookPage = ({ hasPaid = false }: { hasPaid?: boolean }) => {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">Secure Your Audit Slot</h3>
                   <p className="text-zinc-400 mb-8 leading-relaxed">
-                    Complete your $300 payment to unlock the booking calendar and reserve your AI Audit session.
+                    Secure your AI Audit for $300 and unlock our live booking calendar to choose your session time.
                   </p>
                   {paymentError && <p className="text-red-400 text-sm mb-4">{paymentError}</p>}
                   <button
@@ -1398,7 +1824,7 @@ const BookPage = ({ hasPaid = false }: { hasPaid?: boolean }) => {
                     disabled={paymentLoading}
                     className="w-full py-5 bg-white text-black font-bold rounded-full hover:bg-zinc-200 transition-all flex items-center justify-center gap-3 disabled:opacity-50 text-lg"
                   >
-                    {paymentLoading ? 'Redirecting to payment...' : 'Pay $300 & Book Your Slot'}
+                    {paymentLoading ? 'Redirecting to payment...' : 'Book Your Slot'}
                     {!paymentLoading && <ArrowRight className="w-5 h-5" />}
                   </button>
                   <p className="text-[10px] text-zinc-600 mt-4">Secured by Stripe. Money-back guarantee if you don't find value.</p>
@@ -1477,14 +1903,6 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
 
           {/* What You Get */}
           <div className="p-10 glass rounded-[2.5rem] bg-white/[0.02] border-white/10">
-            <div className="text-center mb-10">
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-500/50 mb-3 block">How It Works</span>
-              <div className="flex items-center justify-center gap-4 text-white">
-                <Sparkles className="w-6 h-6 text-blue-400" />
-                <h2 className="text-2xl font-bold uppercase tracking-widest">How It Works</h2>
-              </div>
-            </div>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { icon: Video, title: "1. 30-Min Discovery Call", desc: "A focused conversation to understand your business, current tools, and biggest time drains before we dive deeper." },
@@ -1523,7 +1941,7 @@ const AssessmentPage = ({ onNavigate }: { onNavigate: (view: string) => void }) 
                     <div className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0 mt-1">
                       <CheckCircle2 className="w-4 h-4 text-blue-400" />
                     </div>
-                    <p className="text-sm text-zinc-200">Or invest 30 minutes with us and walk away with a clear, actionable plan to take back your time.</p>
+                    <p className="text-sm text-zinc-200">Or invest a couple of hours with us and walk away with a clear, actionable plan to take back your time.</p>
                   </div>
                 </div>
 
